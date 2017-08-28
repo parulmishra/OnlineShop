@@ -210,15 +210,15 @@ namespace OnlineShop.Models
       }
       return product;
     }
-    public static List<Product> Search(string seachterm)
+    public static List<Product> Search(string seachParameter)
     {
-      List<Product> foundCategories = new List<Product>{};
-      string searchTerm = name.ToLower()[0].ToString();
+      List<Product> foundProducts = new List<Product>{};
+      string searchTerm = searchParameter.ToLower()[0].ToString();
       string wildCard = searchTerm + "%";
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM categories WHERE name LIKE @wildCard;";
+      cmd.CommandText = @"SELECT * FROM products WHERE brand LIKE @wildCard;";
 
       MySqlParameter searchTermParameter = new MySqlParameter();
       searchTermParameter.ParameterName = "@wildCard";
@@ -228,17 +228,21 @@ namespace OnlineShop.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int categoryId = rdr.GetInt32(0);
-        string categoryName = rdr.GetString(1);
-        Product newProduct = new Product(categoryName, categoryId);
-        foundCategories.Add(newProduct);
+        int productId = rdr.GetInt32(0);
+        int categoryId = rdr.GetInt32(1);
+        string productBrand = rdr.GetString(2);
+        float price = rdr.GetFloat(3);
+        string description = rdr.GetDescription(4);
+        string seller = rdr.GetString(5);
+        Product newProduct = new Product(categoryId,productBrand,price,description,seller,productId);
+        foundProducts.Add(newProduct);
       }
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return foundCategories;
+      return foundProducts;
     }
   }
 }

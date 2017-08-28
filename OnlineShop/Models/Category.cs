@@ -149,38 +149,5 @@ namespace OnlineShop.Models
       }
       return category;
     }
-    public static List<Product> Search(string brand)
-    {
-      List<Category> foundProducts = new List<Product>{};
-      string searchTerm = seachParameter.ToLower()[0].ToString();
-      string wildCard = searchTerm + "%";
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM products WHERE brand LIKE @wildCard;";
-
-      MySqlParameter searchTermParameter = new MySqlParameter();
-      searchTermParameter.ParameterName = "@wildCard";
-      searchTermParameter.Value = wildCard;
-      cmd.Parameters.Add(searchTermParameter);
-
-      var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
-      {
-        int productId = rdr.GetInt32(0);
-        int categoryId = rdr.GetInt32(1);
-        string productBrand = rdr.GetString(2);
-        float price = rdr.GetFloat(3);
-        string seller = rdr.GetString(5);
-        Product newProduct = new Product(categoryId,productBrand,price,description,seller,productId);
-        foundCategories.Add(newProduct);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return foundProducts;
-    }
    }
 }
