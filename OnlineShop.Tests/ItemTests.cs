@@ -57,11 +57,28 @@ namespace OnlineShop.Tests
       List<Item> expected = new List<Item> {two};
       List<Item> actual = Item.GetAll();
 
-      CollectionAssert.AreEqual(expected, actual);      
+      CollectionAssert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void GetProductInfo_ReturnsProductOfItem_Product()
+    {
+      Product shoes = new Product(1, "Adidas", 15.99, "Running shoes", "Fred Meyer", "");
+      shoes.Save();
+
+      Item myShoes = new Item("Small", "Red", shoes.GetId());
+      myShoes.Save();
+
+      Product expected = shoes;
+      Product actual = myShoes.GetProductInfo();
+
+      Assert.AreEqual(expected, actual);
     }
 
     public void Dispose()
     {
+      Category.DeleteAll();
+      Product.DeleteAll();
       Item.DeleteAll();
     }
   }

@@ -109,6 +109,49 @@ namespace OnlineShop.Models
       }
     }
 
+    public Product GetProductInfo()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM products WHERE id = @productId;";
+
+      MySqlParameter productId = new MySqlParameter();
+      productId.ParameterName = "@productId";
+      productId.Value = _productId;
+      cmd.Parameters.Add(productId);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      int categoryId = 0;
+      string brand = "";
+      double price = 0.0;
+      string description = "";
+      string seller = "";
+      string image = "";
+      int id = 0;
+
+      while(rdr.Read())
+      {
+        id = rdr.GetInt32(0);
+        categoryId = rdr.GetInt32(1);
+        brand = rdr.GetString(2);
+        price = rdr.GetDouble(3);
+        description = rdr.GetString(4);
+        seller = rdr.GetString(5);
+        image = rdr.GetString(6);
+      }
+
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+
+      Product itemProduct = new Product(categoryId, brand, price, description, seller, image, id);
+      return itemProduct;
+    }
+
     public static Item Find(int id)
     {
       MySqlConnection conn = DB.Connection();
