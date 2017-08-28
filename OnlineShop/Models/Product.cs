@@ -9,17 +9,19 @@ namespace OnlineShop.Models
     private int _id;
     private int _category_id;
     private string _brand;
-    private float _price;
+    double _price;
     private string _description;
     private string _seller;
+    private string _image;
 
-    public Product(int categoryId, string brand, float price, string description, string seller, int id= 0)
+    public Product(int categoryId, string brand, double price, string description, string seller, string image,int id= 0)
     {
       _category_id = categoryId;
       _brand = brand;
       _price = price;
       _description = description;
       _seller = seller;
+      _image = image;
       _id = id;
     }
     public int GetId()
@@ -34,7 +36,7 @@ namespace OnlineShop.Models
     {
       return _brand;
     }
-    public float GetPrice()
+    public double GetPrice()
     {
       return _price;
     }
@@ -45,6 +47,10 @@ namespace OnlineShop.Models
     public string GetSeller()
     {
       return _seller;
+    }
+    public string GetImage()
+    {
+      return _image;
     }
     public override bool Equals(Object otherProduct)
     {
@@ -61,7 +67,8 @@ namespace OnlineShop.Models
         bool priceEquality = newProduct.GetPrice() == this._price;
         bool descriptionEquality = newProduct.GetDescription() == this._description;
         bool sellerEquality = newProduct.GetSeller() == this._seller;
-        return (idEquality && categoryIdEquality && brandEquality && priceEquality && descriptionEquality && sellerEquality);
+        bool imageEquality = newProduct.GetImage() == this._image;
+        return (idEquality && categoryIdEquality && brandEquality && priceEquality && descriptionEquality && sellerEquality && imageEquality);
       }
     }
     public override int GetHashCode()
@@ -73,7 +80,12 @@ namespace OnlineShop.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO products(category_id,brand,price,description,seller) VALUES (@category_id,@brand,@price,@description,@seller);";
+      cmd.CommandText = @"INSERT INTO products(category_id,brand,price,description,seller,image) VALUES (@category_id,@brand,@price,@description,@seller,@image);";
+
+      MySqlParameter categoryIdParameter = new MySqlParameter();
+      categoryIdParameter.ParameterName = "@category_id";
+      categoryIdParameter.Value = _category_id;
+      cmd.Parameters.Add(categoryIdParameter);
 
       MySqlParameter brandParameter = new MySqlParameter();
       brandParameter.ParameterName = "@brand";
@@ -95,10 +107,10 @@ namespace OnlineShop.Models
       sellerParameter.Value = _seller;
       cmd.Parameters.Add(sellerParameter);
 
-      MySqlParameter categoryIdParameter = new MySqlParameter();
-      categoryIdParameter.ParameterName = "@categoryId";
-      categoryIdParameter.Value = _category_id;
-      cmd.Parameters.Add(categoryIdParameter);
+      MySqlParameter imageParameter = new MySqlParameter();
+      imageParameter.ParameterName = "@image";
+      imageParameter.Value = _image;
+      cmd.Parameters.Add(imageParameter);
 
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
@@ -123,10 +135,11 @@ namespace OnlineShop.Models
         int id = rdr.GetInt32(0);
         int category_id = rdr.GetInt32(1);
         string brand = rdr.GetString(2);
-        float price  = rdr.GetFloat(3);
+        double price  = rdr.GetDouble(3);
         string description = rdr.GetString(4);
         string seller = rdr.GetString(5);
-        Product newProduct = new Product(category_id,brand,price,description,seller,id);
+        string image = rdr.GetString(6);
+        Product newProduct = new Product(category_id,brand,price,description,seller,image,id);
         allProducts.Add(newProduct);
       }
       conn.Close();
@@ -151,16 +164,16 @@ namespace OnlineShop.Models
         conn.Dispose();
       }
     }
-    public void DeleteByCategory()
+    public void Delete()
     {
-      MySqlConnection conn =DB.Connection();
+      MySqlConnection conn = DB.Connection();
       conn.Open();
 
-      MySqlCommand cmd = new MySqlCommand(@"DELETE FROM products WHERE category_id=@thisId;");
+      MySqlCommand cmd = new MySqlCommand(@"DELETE FROM products WHERE id=@thisId;",conn);
 
       MySqlParameter idParameter = new MySqlParameter();
       idParameter.ParameterName = "@thisId";
-      idParameter.Value = _category_id;
+      idParameter.Value = _id;
       cmd.Parameters.Add(idParameter);
 
       cmd.ExecuteNonQuery();
@@ -170,6 +183,25 @@ namespace OnlineShop.Models
         conn.Dispose();
       }
     }
+    // public void DeleteByCategory()
+    // {
+    //   MySqlConnection conn =DB.Connection();
+    //   conn.Open();
+    //
+    //   MySqlCommand cmd = new MySqlCommand(@"DELETE FROM products WHERE category_id=@thisId;");
+    //
+    //   MySqlParameter idParameter = new MySqlParameter();
+    //   idParameter.ParameterName = "@thisId";
+    //   idParameter.Value = _category_id;
+    //   cmd.Parameters.Add(idParameter);
+    //
+    //   cmd.ExecuteNonQuery();
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    // }
     public static Product Find(int id)
     {
       MySqlConnection conn =DB.Connection();
@@ -188,20 +220,22 @@ namespace OnlineShop.Models
       int idProduct = 0;
       int idCategory = 0;
       string brand = "";
-      float price = 0.0;
+      double price = 0.0;
       string description = "";
       string seller = "";
+      string image = "";
 
       while(rdr.Read())
       {
         idProduct = rdr.GetInt32(0);
         idCategory = rdr.GetInt32(1);
         brand = rdr.GetString(2);
-        price = rdr.GetFloat(3);
+        price = rdr.GetDouble(3);
         description = rdr.GetString(4);
         seller = rdr.GetString(5);
+        image = rdr.GetString(6);
       }
-      var product = new Product(idCategory,brand,price,description,seller,idProduct);
+      var product = new Product(idCategory,brand,price,description,seller,image,idProduct);
 
       conn.Close();
       if (conn != null)
@@ -210,7 +244,7 @@ namespace OnlineShop.Models
       }
       return product;
     }
-    public static List<Product> Search(string seachParameter)
+    public static List<Product> Search(string searchParameter)
     {
       List<Product> foundProducts = new List<Product>{};
       string searchTerm = searchParameter.ToLower()[0].ToString();
@@ -231,10 +265,12 @@ namespace OnlineShop.Models
         int productId = rdr.GetInt32(0);
         int categoryId = rdr.GetInt32(1);
         string productBrand = rdr.GetString(2);
-        float price = rdr.GetFloat(3);
-        string description = rdr.GetDescription(4);
+        double price = rdr.GetDouble(3);
+        string description = rdr.GetString(4);
         string seller = rdr.GetString(5);
-        Product newProduct = new Product(categoryId,productBrand,price,description,seller,productId);
+        string image = rdr.GetString(6);
+
+        Product newProduct = new Product(categoryId,productBrand,price,description,seller,image,productId);
         foundProducts.Add(newProduct);
       }
       conn.Close();
