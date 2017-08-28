@@ -13,6 +13,12 @@ namespace OnlineShop.Controllers
           return View();
       }
 
+      [HttpGet("/products/details")]
+      public ActionResult ProductDetails()
+      {
+          return View();
+      }
+
     }
 
   }

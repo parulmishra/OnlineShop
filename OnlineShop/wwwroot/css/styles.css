@@ -1,19 +1,32 @@
-html {
-  box-sizing: border-box;
+body {
+  font-family: 'Poppins', sans-serif;
+}
+#featured-header{
+
+  padding-top: 10px;
+  padding-bottom: 20px;
+  background-color: #9994aa;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .nav
 {
 font-size: 1.5em;
+margin-bottom: 0px;
+}
+.navbar{
+  background-color: #f6f4f9;
+  margin-bottom: 0px;
 }
 .navbar-brand{
   font-size: 2em;
   margin: 10px;
-
 }
 .footer{
-  background-color: #f4f8ff;
+  background-color: #e0cab3;
   padding: 2em;
+
 
 }
 
@@ -26,4 +39,103 @@ font-size: 1.5em;
 .featured{
   background-color: #7BC1AE;
   margin: 10px;
+}
+#myCarousel{
+  background-color: #fffbf7;
+
+}
+.featured-carousel img{
+ height: 600px;
+ width: auto;
+ padding: 50px;
+}
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+.glyphicon{
+  color: black;
+}
+.glyphicon:hover{
+  color: grey;
+}
+.page-header{
+  text-align: center;
+}
+
+/* Details Page */
+
+.color {
+  border: 1px solid grey;
+  display: inline-block;
+  width:50px;
+  height:50px;
+  margin: 5px;
+  margin-top:8px;
+}
+
+.color:hover {
+  opacity: 0.6;
+  border: 3px solid black;
+}
+
+.color-1 {
+  background-color: black;
+}
+
+.color-2 {
+  background-color:white;
+}
+
+.color-3 {
+  background-color:skyblue;
+}
+
+.color-4 {
+  background-color:green;
+}
+
+.color-5 {
+  background-color:red;
+}
+
+.color-6 {
+  background-color:beige;
+}
+input[type="radio"]{
+  visibility: hidden;
+}
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  display: none;
+  position: absolute; /* Remove input from document flow */
+}
+label > input + div{ /* IMAGE STYLES */
+  cursor:pointer;
+}
+label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
+  border: 3px solid black;
+}
+#productimg{
+  padding: 10px;
+  margin-top: 50px;
+}
+#cart{
+  margin-top: 30px;
+  padding: 40px;
+
+}
+#cart button{
+  margin-top: 20px;
+  font-size: 2em;
+}
+#cart label, input{
+  font-size: 2em;
 }
