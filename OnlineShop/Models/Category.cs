@@ -171,7 +171,6 @@ namespace OnlineShop.Models
         int categoryId = rdr.GetInt32(1);
         string productBrand = rdr.GetString(2);
         float price = rdr.GetFloat(3);
-        string description = rdr..GetString(4);
         string seller = rdr.GetString(5);
         Product newProduct = new Product(categoryId,productBrand,price,description,seller,productId);
         foundCategories.Add(newProduct);
