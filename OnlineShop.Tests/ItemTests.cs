@@ -39,10 +39,25 @@ namespace OnlineShop.Tests
     {
       Item expected = new Item("small", "red", 1);
       expected.Save();
-      
+
       Item actual = Item.Find(expected.GetId());
 
       Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void Delete_DeletesItemInDatabase_ItemList()
+    {
+      Item one = new Item("small", "red", 1);
+      Item two = new Item("medium", "blue", 2);
+      one.Save();
+      two.Save();
+
+      one.Delete();
+      List<Item> expected = new List<Item> {two};
+      List<Item> actual = Item.GetAll();
+
+      CollectionAssert.AreEqual(expected, actual);      
     }
 
     public void Dispose()

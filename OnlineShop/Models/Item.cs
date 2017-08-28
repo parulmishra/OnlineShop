@@ -149,6 +149,28 @@ namespace OnlineShop.Models
       return foundItem;
     }
 
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM items WHERE id = @thisId;";
+
+      MySqlParameter itemId = new MySqlParameter();
+      itemId.ParameterName = "@thisId";
+      itemId.Value = _id;
+      cmd.Parameters.Add(itemId);
+
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
     public static List<Item> GetAll()
     {
       List<Item> allItems = new List<Item> {};
