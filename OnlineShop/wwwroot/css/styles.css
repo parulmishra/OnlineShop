@@ -1,0 +1,29 @@
+html {
+  box-sizing: border-box;
+}
+
+.nav
+{
+font-size: 1.5em;
+}
+.navbar-brand{
+  font-size: 2em;
+  margin: 10px;
+
+}
+.footer{
+  background-color: #f4f8ff;
+  padding: 2em;
+
+}
+
+.form-horizontal {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  margin: auto;
+}
+.featured{
+  background-color: #7BC1AE;
+  margin: 10px;
+}

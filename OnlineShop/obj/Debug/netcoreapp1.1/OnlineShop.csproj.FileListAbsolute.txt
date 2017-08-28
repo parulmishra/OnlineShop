@@ -1,0 +1,8 @@
+/Users/Guest/Desktop/OnlineShop/OnlineShop/bin/Debug/netcoreapp1.1/OnlineShop.deps.json
+/Users/Guest/Desktop/OnlineShop/OnlineShop/bin/Debug/netcoreapp1.1/OnlineShop.runtimeconfig.json
+/Users/Guest/Desktop/OnlineShop/OnlineShop/bin/Debug/netcoreapp1.1/OnlineShop.runtimeconfig.dev.json
+/Users/Guest/Desktop/OnlineShop/OnlineShop/obj/Debug/netcoreapp1.1/OnlineShop.AssemblyInfo.cs
+/Users/Guest/Desktop/OnlineShop/OnlineShop/bin/Debug/netcoreapp1.1/OnlineShop.dll
+/Users/Guest/Desktop/OnlineShop/OnlineShop/bin/Debug/netcoreapp1.1/OnlineShop.pdb
+/Users/Guest/Desktop/OnlineShop/OnlineShop/obj/Debug/netcoreapp1.1/OnlineShop.dll
+/Users/Guest/Desktop/OnlineShop/OnlineShop/obj/Debug/netcoreapp1.1/OnlineShop.pdb
