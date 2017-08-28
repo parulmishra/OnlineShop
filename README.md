@@ -43,6 +43,8 @@ _This site uses a SQL database to track the purcashes of clothing items in an on
 | Buy | Initial View | Address, credit card, shipping fields, list of items in cart, subtotal |
 | Buy | Click Confirm | Sets item in DB to purchased |
 
+![](/schema.png)
+
 
 ## Setup
 
