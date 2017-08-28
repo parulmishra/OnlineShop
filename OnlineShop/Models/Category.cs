@@ -20,6 +20,7 @@ namespace OnlineShop.Models
     public string GetName()
     {
       return _name;
+    }
 
     public override bool Equals(Object otherCategory)
     {
