@@ -294,19 +294,16 @@ namespace OnlineShop.Models
       cmd.Parameters.Add(productIdParameter);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int itemId = 0;
-      int productId = 0;
-      string size = "";
-      string color = "";
-      bool available = true;
+
       while(rdr.Read())
       {
-         itemId = rdr.GetInt32(0);
-         productId = rdr.GetInt32(1);
-         size = rdr.GetString(2);
-         color = rdr.GetString(3);
-         available = rdr.GetBoolean(4);
-         var item = new Item(productId,size,color,available,itemId);
+         int itemId = rdr.GetInt32(0);
+         int productId = rdr.GetInt32(1);
+         string size = rdr.GetString(2);
+         string color = rdr.GetString(3);
+         bool available = rdr.GetBoolean(4);
+
+         Item item = new Item(size,color,productId,available,itemId);
          itemsForThisProduct.Add(item);
       }
       return itemsForThisProduct;
