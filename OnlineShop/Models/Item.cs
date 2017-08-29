@@ -122,6 +122,7 @@ namespace OnlineShop.Models
 
       int categoryId = 0;
       string brand = "";
+      string name = "";
       double price = 0.0;
       string description = "";
       string seller = "";
@@ -133,16 +134,17 @@ namespace OnlineShop.Models
         id = rdr.GetInt32(0);
         categoryId = rdr.GetInt32(1);
         brand = rdr.GetString(2);
-        price = rdr.GetDouble(3);
-        description = rdr.GetString(4);
-        seller = rdr.GetString(5);
-        image = rdr.GetString(6);
+        name = rdr.GetString(3);
+        price = rdr.GetDouble(4);
+        description = rdr.GetString(5);
+        seller = rdr.GetString(6);
+        image = rdr.GetString(7);
       }
       if(conn != null)
       {
         conn.Dispose();
       }
-      Product itemProduct = new Product(categoryId, brand, price, description, seller, image, id);
+      Product itemProduct = new Product(categoryId, brand,name,price, description, seller, image, id);
       return itemProduct;
     }
 
@@ -244,5 +246,6 @@ namespace OnlineShop.Models
       {
         conn.Dispose();
       }
+    }
   }
 }
