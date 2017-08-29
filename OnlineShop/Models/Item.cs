@@ -192,7 +192,7 @@ namespace OnlineShop.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM items WHERE id = @thisId;";
+      cmd.CommandText = @"DELETE FROM items WHERE id = @thisId; DELETE FROM items_orders WHERE item_id = @thisId";
 
       MySqlParameter itemId = new MySqlParameter();
       itemId.ParameterName = "@thisId";
@@ -239,7 +239,7 @@ namespace OnlineShop.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM items;";
+      cmd.CommandText = @"DELETE FROM items; DELETE FROM items_orders";
       cmd.ExecuteNonQuery();
       conn.Close();
       if(conn != null)

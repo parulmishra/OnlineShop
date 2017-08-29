@@ -102,12 +102,53 @@ namespace OnlineShop.Tests
 
       Assert.AreEqual(expected, actual);
     }
+    [TestMethod]
+    public void GetAddresses_GetsBuyersAddresses_ListAddresses()
+    {
+      Buyer newBuyer = new Buyer("username", "phone", "email", "password", "creditCard");
+      newBuyer.Save();
+
+      Address one = new Address(newBuyer.GetId(),"street","name","city","state","country","zip");
+      Address two = new Address(newBuyer.GetId(),"street2","name2","city2","state2","country2","zip2");
+      one.Save();
+      two.Save();
+
+      List<Address> expected = new List<Address>{one, two};
+      List<Address> actual = newBuyer.GetAddresses();
+
+      CollectionAssert.AreEqual(expected,actual);
+    }
+    [TestMethod]
+    public void Delete_DeletesRelationshipsinDatabase_OrderList()
+    {
+      Buyer newBuyer = new Buyer("username", "phone", "email", "password", "creditCard");
+      newBuyer.Save();
+
+      Buyer newBuyer2 = new Buyer("username", "phone", "email", "password", "creditCard");
+      newBuyer2.Save();
+
+      Order one = new Order(newBuyer.GetId(),default(DateTime));
+      Order two = new Order(newBuyer.GetId(),default(DateTime));
+      Order three = new Order(newBuyer2.GetId(),default(DateTime));
+
+      one.Save();
+      two.Save();
+      three.Save();
+
+      newBuyer.Delete();
+
+      List<Order> expected = new List<Order>{three};
+      List<Order> actual = Order.GetAll();
+
+      CollectionAssert.AreEqual(expected,actual);
+    }
 
     public void Dispose()
     {
       Category.DeleteAll();
       Product.DeleteAll();
       Item.DeleteAll();
+      Address.DeleteAll();
       Buyer.DeleteAll();
       Order.DeleteAll();
     }

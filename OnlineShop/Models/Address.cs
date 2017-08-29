@@ -8,14 +8,16 @@ namespace OnlineShop.Models
   {
     private int _id;
     private int _buyer_id;
+    private string _name;
     private string _street;
     private string _city;
     private string _state;
     private string _country;
     private string _zip;
-    public Address(int buyerId,string street, string city, string state, string country, string zip, int id=0)
+    public Address(int buyerId, string name, string street, string city, string state, string country, string zip, int id=0)
     {
       _buyer_id = buyerId;
+      _name = name;
       _street = street;
       _city = city;
       _state = state;
@@ -30,6 +32,10 @@ namespace OnlineShop.Models
     public int GetBuyerId()
     {
       return _buyer_id;
+    }
+    public string GetName()
+    {
+      return _name;
     }
     public string GetStreet()
     {
@@ -62,11 +68,12 @@ namespace OnlineShop.Models
         Address newAddress = (Address) otherAddress;
         bool idEquality = newAddress.GetId() == this._id;
         bool buyerIdEquality = newAddress.GetBuyerId() == this._buyer_id;
+        bool nameEquality = newAddress.GetName() == _name;
         bool streetEquality = newAddress.GetStreet() == this._street;
         bool cityEquality = newAddress.GetCity() == this._city;
         bool countryEquality = newAddress.GetCountry() == this._country;
         bool zipEquality = newAddress.GetZip() == this._zip;
-        return (idEquality && buyerIdEquality && streetEquality && cityEquality && countryEquality && zipEquality);
+        return (idEquality && buyerIdEquality && nameEquality && streetEquality && cityEquality && countryEquality && zipEquality);
       }
     }
     public override int GetHashCode()
@@ -78,12 +85,17 @@ namespace OnlineShop.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO addresses(buyer_id,street,city,state,country,zip) VALUES (@buyer_id,@street,@city,@state,@country,@zip);";
+      cmd.CommandText = @"INSERT INTO addresses(buyer_id,name,street,city,state,country,zip) VALUES (@buyer_id,@name,@street,@city,@state,@country,@zip);";
 
       MySqlParameter buyerIdParameter = new MySqlParameter();
       buyerIdParameter.ParameterName = "@buyer_id";
       buyerIdParameter.Value = _buyer_id;
       cmd.Parameters.Add(buyerIdParameter);
+
+      MySqlParameter nameParameter = new MySqlParameter();
+      nameParameter.ParameterName = "@name";
+      nameParameter.Value = _name;
+      cmd.Parameters.Add(nameParameter);
 
       MySqlParameter streetParameter = new MySqlParameter();
       streetParameter.ParameterName = "@street";
@@ -132,12 +144,13 @@ namespace OnlineShop.Models
       {
         int id = rdr.GetInt32(0);
         int buyerId = rdr.GetInt32(1);
-        string street = rdr.GetString(2);
-        string city = rdr.GetString(3);
-        string state = rdr.GetString(4);
-        string country = rdr.GetString(5);
-        string zip = rdr.GetString(6);
-        Address newAddress = new Address(buyerId,street,city,state,country,zip,id);
+        string name = rdr.GetString(2);
+        string street = rdr.GetString(3);
+        string city = rdr.GetString(4);
+        string state = rdr.GetString(5);
+        string country = rdr.GetString(6);
+        string zip = rdr.GetString(7);
+        Address newAddress = new Address(buyerId,name,street,city,state,country,zip,id);
         allAddresses.Add(newAddress);
       }
       conn.Close();
@@ -151,12 +164,28 @@ namespace OnlineShop.Models
     {
       MySqlConnection conn =DB.Connection();
       conn.Open();
-      MySqlCommand cmd = new MySqlCommand(@"DELETE FROM addresses WHERE id=@thisId;");
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM addresses WHERE id=@thisId;";
 
       MySqlParameter idParameter = new MySqlParameter();
       idParameter.ParameterName = "@thisId";
       idParameter.Value = _id;
       cmd.Parameters.Add(idParameter);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public static void DeleteAll()
+    {
+      MySqlConnection conn =DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM addresses;";
 
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -182,6 +211,7 @@ namespace OnlineShop.Models
 
       int addressId = 0;
       int buyerId = 0;
+      string name = "";
       string street = "";
       string city = "";
       string state = "";
@@ -191,13 +221,14 @@ namespace OnlineShop.Models
       {
         addressId = rdr.GetInt32(0);
         buyerId = rdr.GetInt32(1);
-        street = rdr.GetString(2);
-        city = rdr.GetString(3);
-        state = rdr.GetString(4);
-        country = rdr.GetString(5);
-        zip = rdr.GetString(6);
+        name = rdr.GetString(2);
+        street = rdr.GetString(3);
+        city = rdr.GetString(4);
+        state = rdr.GetString(5);
+        country = rdr.GetString(6);
+        zip = rdr.GetString(7);
       }
-      var address = new Address(buyerId,street,city,state,country,zip,id);
+      var address = new Address(buyerId,name,street,city,state,country,zip,id);
 
       conn.Close();
       if (conn != null)

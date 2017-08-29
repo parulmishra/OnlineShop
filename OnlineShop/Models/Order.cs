@@ -309,6 +309,7 @@ namespace OnlineShop.Models
       {
         conn.Dispose();
       }
+      RemoveAllItems();
     }
 
     public static List<Order> GetAll()
@@ -347,7 +348,7 @@ namespace OnlineShop.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM orders;";
+      cmd.CommandText = @"DELETE FROM orders; DELETE FROM items_orders;";
 
       cmd.ExecuteNonQuery();
       conn.Close();

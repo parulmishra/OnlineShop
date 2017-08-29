@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 29, 2017 at 09:01 PM
+-- Generation Time: Aug 29, 2017 at 01:48 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.0.15
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `online_shop`
 --
-CREATE DATABASE IF NOT EXISTS `online_shop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `online_shop`;
 
 -- --------------------------------------------------------
 
@@ -31,7 +29,6 @@ USE `online_shop`;
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
   `buyer_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
   `street` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
@@ -48,6 +45,7 @@ CREATE TABLE `addresses` (
 CREATE TABLE `buyers` (
   `id` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
+  `shipping_address` text NOT NULL,
   `phone` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(10) NOT NULL,
@@ -114,7 +112,6 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `brand` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
   `price` double(11,2) NOT NULL,
   `description` text NOT NULL,
   `seller` varchar(255) NOT NULL,

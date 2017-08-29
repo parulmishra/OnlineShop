@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 29, 2017 at 09:02 PM
+-- Generation Time: Aug 29, 2017 at 01:48 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.0.15
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `online_shop_test`
 --
-CREATE DATABASE IF NOT EXISTS `online_shop_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `online_shop_test`;
 
 -- --------------------------------------------------------
 
@@ -31,7 +29,6 @@ USE `online_shop_test`;
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
   `buyer_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
   `street` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
@@ -48,6 +45,7 @@ CREATE TABLE `addresses` (
 CREATE TABLE `buyers` (
   `id` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
+  `shipping_address` text NOT NULL,
   `phone` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(10) NOT NULL,
@@ -91,67 +89,6 @@ CREATE TABLE `items_orders` (
   `item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `items_orders`
---
-
-INSERT INTO `items_orders` (`id`, `order_id`, `item_id`) VALUES
-(1, 9, 11),
-(2, 14, 17),
-(3, 19, 23),
-(4, 20, 24),
-(6, 25, 31),
-(7, 26, 32),
-(11, 32, 41),
-(12, 33, 42),
-(16, 35, 46),
-(17, 35, 47),
-(18, 40, 53),
-(19, 41, 54),
-(23, 43, 58),
-(24, 43, 59),
-(25, 44, 60),
-(26, 49, 67),
-(27, 50, 68),
-(31, 52, 72),
-(32, 52, 73),
-(33, 53, 74),
-(34, 58, 81),
-(35, 59, 82),
-(39, 61, 86),
-(40, 61, 87),
-(41, 62, 88),
-(42, 67, 95),
-(43, 68, 96),
-(47, 70, 100),
-(48, 70, 101),
-(49, 71, 102),
-(50, 76, 109),
-(51, 77, 110),
-(55, 79, 114),
-(56, 79, 115),
-(57, 80, 116),
-(58, 85, 123),
-(59, 86, 124),
-(63, 88, 128),
-(64, 88, 129),
-(65, 89, 130),
-(66, 97, 137),
-(67, 98, 138),
-(71, 100, 142),
-(72, 100, 143),
-(73, 101, 144),
-(74, 112, 151),
-(75, 113, 152),
-(79, 115, 156),
-(80, 115, 157),
-(81, 116, 158),
-(82, 127, 165),
-(83, 128, 166),
-(87, 130, 170),
-(88, 130, 171),
-(89, 131, 172);
-
 -- --------------------------------------------------------
 
 --
@@ -175,7 +112,6 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `brand` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
   `price` double(11,2) NOT NULL,
   `description` text NOT NULL,
   `seller` varchar(255) NOT NULL,
@@ -241,32 +177,32 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT for table `buyers`
 --
 ALTER TABLE `buyers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `items_orders`
 --
 ALTER TABLE `items_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
