@@ -77,5 +77,24 @@ namespace OnlineShop.Tests
       //Assert
       CollectionAssert.AreEqual(expectedCategoryList, actualCategoryList);
     }
+    [TestMethod]
+    public void GetProducts_GiveProductsForSpecificCategory_ProductList()
+    {
+      //Arrange
+      Category testCategory1 = new Category("Socks");
+      testCategory1.Save();
+      int categoryId = testCategory1.GetId();
+      Product newProduct = new Product(categoryId,"Adidas",100.0,"good quality","Amazon","",1);
+      newProduct.Save();
+      //Act
+
+      List<Product> actualProductList = testCategory1.GetProducts();
+      List<Product> expectedProductList = new List<Product>();
+      Console.WriteLine("list1 count" + expectedProductList.Count);
+      Console.WriteLine("list2 count" + actualProductList.Count);
+      expectedProductList.Add(newProduct);
+      //Assert
+      CollectionAssert.AreEqual(expectedProductList,actualProductList);
+    }
   }
 }

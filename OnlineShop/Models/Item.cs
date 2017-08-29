@@ -65,12 +65,10 @@ namespace OnlineShop.Models
         return (idEquality && productIdEquality && sizeEquality && colorEquality && availableEquality);
       }
     }
-
     public override int GetHashCode()
     {
       return _id.GetHashCode();
     }
-
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
@@ -102,13 +100,11 @@ namespace OnlineShop.Models
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
       conn.Close();
-
       if(conn != null)
       {
         conn.Dispose();
       }
     }
-
     public Product GetProductInfo()
     {
       MySqlConnection conn = DB.Connection();
@@ -142,12 +138,10 @@ namespace OnlineShop.Models
         seller = rdr.GetString(5);
         image = rdr.GetString(6);
       }
-
       if(conn != null)
       {
         conn.Dispose();
       }
-
       Product itemProduct = new Product(categoryId, brand, price, description, seller, image, id);
       return itemProduct;
     }
@@ -181,9 +175,7 @@ namespace OnlineShop.Models
         color = rdr.GetString(3);
         available = rdr.GetBoolean(4);
       }
-
       conn.Close();
-
       if(conn != null)
       {
         conn.Dispose();
@@ -206,14 +198,12 @@ namespace OnlineShop.Models
       cmd.Parameters.Add(itemId);
 
       cmd.ExecuteNonQuery();
-
       conn.Close();
       if(conn != null)
       {
         conn.Dispose();
       }
     }
-
     public static List<Item> GetAll()
     {
       List<Item> allItems = new List<Item> {};
@@ -235,7 +225,6 @@ namespace OnlineShop.Models
         Item newItem = new Item(size, color, productId, available, id);
         allItems.Add(newItem);
       }
-
       conn.Close();
       if(conn != null)
       {
@@ -243,23 +232,17 @@ namespace OnlineShop.Models
       }
       return allItems;
     }
-
     public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"DELETE FROM items;";
-
       cmd.ExecuteNonQuery();
       conn.Close();
-
-
       if(conn != null)
       {
         conn.Dispose();
       }
-    }
   }
 }

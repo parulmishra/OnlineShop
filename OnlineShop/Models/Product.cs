@@ -280,5 +280,36 @@ namespace OnlineShop.Models
       }
       return foundProducts;
     }
+    public List<Item> GetItems()
+    {
+      List<Item> itemsForThisProduct = new List<Item>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM items WHERE product_id=@productId;";
+
+      MySqlParameter productIdParameter = new MySqlParameter();
+      productIdParameter.ParameterName = "@productId";
+      productIdParameter.Value = this._id;
+      cmd.Parameters.Add(productIdParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int itemId = 0;
+      int productId = 0;
+      string size = "";
+      string color = "";
+      bool available = true;
+      while(rdr.Read())
+      {
+         itemId = rdr.GetInt32(0);
+         productId = rdr.GetInt32(1);
+         size = rdr.GetString(2);
+         color = rdr.GetString(3);
+         available = rdr.GetBoolean(4);
+         var item = new Item(productId,size,color,available,itemId);
+         itemsForThisProduct.Add(item);
+      }
+      return itemsForThisProduct;
+    }
   }
 }
