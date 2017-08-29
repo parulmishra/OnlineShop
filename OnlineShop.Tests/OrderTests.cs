@@ -126,7 +126,7 @@ namespace OnlineShop.Tests
       Order newOrder = new Order(0,default(DateTime),false);
       newOrder.Save();
 
-      Product firstProduct = new Product(1,"Adidas",100.50,"good quality","Amazon","",1);
+      Product firstProduct = new Product(1,"Adidas","Shoes",100.50,"good quality","Amazon","",1);
       firstProduct.Save();
 
       Item newItem = new Item("small", "red", firstProduct.GetId());
@@ -149,7 +149,7 @@ namespace OnlineShop.Tests
       Order newOrder = new Order(0,default(DateTime),false);
       newOrder.Save();
 
-      Product firstProduct = new Product(1,"Adidas",100.50,"good quality","Amazon","",1);
+      Product firstProduct = new Product(1,"Adidas","Shoes",100.50,"good quality","Amazon","",1);
       firstProduct.Save();
 
       Item newItem = new Item("small", "red", firstProduct.GetId());

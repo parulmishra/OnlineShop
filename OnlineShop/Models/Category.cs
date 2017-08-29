@@ -168,6 +168,7 @@ namespace OnlineShop.Models
       int productId = 0;
       int categoryId = 0;
       string brand = "";
+      string name = "";
       double price = 0.0;
       string description = "";
       string seller = "";
@@ -178,11 +179,12 @@ namespace OnlineShop.Models
        productId = rdr.GetInt32(0);
        categoryId = rdr.GetInt32(1);
        brand = rdr.GetString(2);
-       price = rdr.GetDouble(3);
-       description = rdr.GetString(4);
-       seller = rdr.GetString(5);
-       image = rdr.GetString(6);
-       var product = new Product(categoryId,brand,price,description,seller,image,productId);
+       name = rdr.GetString(3);
+       price = rdr.GetDouble(4);
+       description = rdr.GetString(5);
+       seller = rdr.GetString(6);
+       image = rdr.GetString(7);
+       var product = new Product(categoryId,brand,name,price,description,seller,image,productId);
        productsForThisCategory.Add(product);
       }
       return productsForThisCategory;
