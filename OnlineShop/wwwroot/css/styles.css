@@ -1,6 +1,7 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
 #featured-header{
 
   padding-top: 10px;
@@ -12,8 +13,8 @@ body {
 
 .nav
 {
-font-size: 1.5em;
-margin-bottom: 0px;
+  font-size: 1.5em;
+  margin-bottom: 0px;
 }
 .navbar{
   background-color: #f6f4f9;
@@ -31,7 +32,8 @@ margin-bottom: 0px;
 }
 
 .form-horizontal {
-  width: 100%;
+  padding-top: 20px;
+  width: 80%;
   display: inline-block;
   position: relative;
   margin: auto;
@@ -138,4 +140,50 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 #cart label, input{
   font-size: 2em;
+}
+/* Category page */
+.products {
+  text-align: center;
+}
+.sort-by {
+  text-align: right;
+  padding: 10px 30px 10px 0;
+  background-color: skyblue;
+  margin-top:-1px;
+}
+.category-product{
+  margin: 30px 0;
+}
+.category-product img{
+  display: block;
+  max-height: 150px;
+  max-width: 150px;
+  width:50%;
+  height:50%;
+  margin:auto;
+}
+.column {
+  display:inline-block;
+  border: 1px solid rgb(238, 238, 238);
+  background: linear-gradient(to bottom, #FFF 0%, rgb(251, 251, 251) 100%);
+  width:28%;
+  margin: 10px 20px;
+  padding: 15px 0;
+  min-height: 250px;
+  min-width: 250px;
+}
+.brand-description {
+  display:inline-block;
+  margin-top:30px;
+}
+/* Cart page */
+.item img
+{
+  max-width: 50px;
+  max-height: 50px;
+}
+.item *
+{
+  margin: 20px;
+  display: inline-block;;
 }
