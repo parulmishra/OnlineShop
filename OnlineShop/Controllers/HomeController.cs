@@ -36,5 +36,15 @@ namespace OnlineShop.Controllers
     {
         return View();
     }
+    [HttpGet("/login")]
+    public ActionResult LogIn()
+    {
+        return View();
+    }
+    [HttpGet("/detail")]
+    public ActionResult BuyerDetail()
+    {
+        return View();
+    }
   }
 }

@@ -5,19 +5,20 @@
   <div class="well buyer_details">
     <div class="row">
       <div class="col-md-5">
-        <div class="row buy-options">
-          <label>Shipping Address:</label>
+        <div class="row address-options buy-options">
+          <label>Ship To:</label>
           <select class="shipping_address">
             <option>address1</option>
             <option>address2</option>
             <option>address2</option>
           </select>
-          <button type="button" class="btn btn-info" name="shipping_address" id="shipping_address">Add Shipping Address</button>
-
+          <p>Or</p>
+          <button type="button" class="btn btn-info" name="shipping_address" id="shipping_address">Add New Shipping Address</button>
+        </div>
           <div id="add_new_shipping_address">
 
           </div>
-        </div>
+
 
       <div class="row buy-options">
         <label>Select Payment Method:</label>
@@ -33,7 +34,7 @@
         <form action = "/" method="post">
           <label for ="author">Card Number</label>
           <div class="form-group">
-            <input type="text" class="form-control" name="buyer-card-number">
+            <input type="number" class="form-control" name="buyer-card-number">
           </div>
 
           <label for ="author">Security Code</label>
@@ -60,17 +61,17 @@
       <div class="well order_details">
         <div class="container">
           <h4>Order Details</h4>
-          <div class ="item">
+          <div class ="product">
             <p>Item1</p>
             <p>Price</p>
           </div>
 
-          <div class ="item">
+          <div class ="product">
             <p>Item1</p>
             <p>Price</p>
           </div>
 
-          <div class ="item">
+          <div class ="product">
             <p>Item1</p>
             <p>Price</p>
           </div>
