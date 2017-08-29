@@ -2,57 +2,94 @@
   Layout = "_Layout";
 }
 <form action="/placed" method="">
-  <div class="row">
-    <div class="col-md-5">
-      <div class="well buyer_details">
-        <label>Shipping Address:</label>
-        <select class="shipping_address">
-          <option>address1</option>
-          <option>address2</option>
-          <option>address2</option>
-        </select>
+  <div class="well buyer_details">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row buy-options">
+          <label>Shipping Address:</label>
+          <select class="shipping_address">
+            <option>address1</option>
+            <option>address2</option>
+            <option>address2</option>
+          </select>
+          <button type="button" class="btn btn-info" name="shipping_address" id="shipping_address">Add Shipping Address</button>
+
+          <div id="add_new_shipping_address">
+
+          </div>
+        </div>
+
+      <div class="row buy-options">
         <label>Select Payment Method:</label>
         <select class="payment_methods">
-          <option>Credit Card</option>
-          <option>Debit Card</option>
+          <option>Visa</option>
+          <option>MasterCard</option>
+          <option>American Express</option>
+          <option>Discover</option>
         </select>
+      </div>
+
+      <div class="row card-form">
+        <form action = "/" method="post">
+          <label for ="author">Card Number</label>
+          <div class="form-group">
+            <input type="text" class="form-control" name="buyer-card-number">
+          </div>
+
+          <label for ="author">Security Code</label>
+          <div class="form-group">
+            <input type="text" class="form-control" name="buyer-card-code">
+          </div>
+
+          <label for ="author">Expiration Date</label>
+          <div class="form-group">
+            <input type="text" class="form-control" name="buyer-card-date">
+          </div>
+        </form>
+      </div>
+
+      <div class="row buy-options">
         <label>Select Delivery Options:</label>
         <select class="delivery_options">
           <option>Express Delivery: 1 to 2 days</option>
           <option>Standard Delivery: 3 to 5 days </option>
         </select>
       </div>
-    </div>
-    <div class="col-md-5">
+     </div>
+    <div class="col-md-3">
       <div class="well order_details">
         <div class="container">
-          <div class="well">
-            <div class ="item">
-              <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-              <p>Item1</p>
-              <p>Price</p>
-              <button type="button" class="btn btn-info" name="delete_button">Delete</button>
-            </div>
+          <h4>Order Details</h4>
+          <div class ="item">
+            <p>Item1</p>
+            <p>Price</p>
           </div>
 
-          <div class="well">
-            <div class ="item">
-              <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-              <p>Item1</p>
-              <p>Price</p>
-              <button type="button" class="btn btn-info" name="delete_button">Delete</button>
-            </div>
+          <div class ="item">
+            <p>Item1</p>
+            <p>Price</p>
           </div>
 
-          <div class="well">
-            <div class ="item">
-              <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-              <p>Item1</p>
-              <p>Price</p>
-              <button type="button" class="btn btn-info" name="delete_button">Delete</button>
-            </div>
+          <div class ="item">
+            <p>Item1</p>
+            <p>Price</p>
           </div>
+
+        </div>
       </div>
-    <div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="well bill_details">
+        <div class="container">
+          <h4>Bill Details</h4>
+          <h5>Total Items:</h5>
+          <h5>Total Items Cost:</h5>
+          <h5>Shipping Cost:</h5>
+          <h5>Tax:</h5>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 </form>
