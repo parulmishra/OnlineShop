@@ -90,7 +90,7 @@ namespace OnlineShop.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM categories;";
+      cmd.CommandText = @"DELETE FROM categories; DELETE FROM products; DELETE FROM items; DELETE from items_orders;";
 
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -104,12 +104,18 @@ namespace OnlineShop.Models
       MySqlConnection conn =DB.Connection();
       conn.Open();
 
-      MySqlCommand cmd = new MySqlCommand(@"DELETE FROM categories WHERE id=@thisId; DELETE FROM products WHERE category_id =@thisId;",conn);
+      MySqlCommand cmd = new MySqlCommand(@"DELETE FROM categories WHERE id=@thisId;",conn);
 
       MySqlParameter idParameter = new MySqlParameter();
       idParameter.ParameterName = "@thisId";
       idParameter.Value = _id;
       cmd.Parameters.Add(idParameter);
+
+      List<Product> categoryProducts = GetProducts();
+      foreach(var product in categoryProducts)
+      {
+        product.Delete();
+      }
 
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -150,13 +156,33 @@ namespace OnlineShop.Models
       }
       return category;
     }
-    public List<Product> GetProducts()
+    public List<Product> GetProducts(string sortParameter = "")
     {
       List<Product> productsForThisCategory = new List<Product>();
       MySqlConnection conn =DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId";
+
+      if (sortParameter == "priceHighToLow")
+      {
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY price DESC;";
+      }
+      else if (sortParameter =="priceLowToHigh")
+      {
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY price ASC;";
+      }
+      else if (sortParameter =="brandAlphabetical")
+      {
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY brand DESC;";
+      }
+      else if (sortParameter =="brandAlphabeticalReverse")
+      {
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY brand ASC;";
+      }
+      else
+      {
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId";
+      }
 
       MySqlParameter categoryIdParameter = new MySqlParameter();
       categoryIdParameter.ParameterName = "@categoryId";

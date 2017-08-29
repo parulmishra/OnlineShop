@@ -172,6 +172,8 @@ namespace OnlineShop.Tests
       Category.DeleteAll();
       Product.DeleteAll();
       Item.DeleteAll();
+      Address.DeleteAll();
+      Buyer.DeleteAll();
       Order.DeleteAll();
     }
   }

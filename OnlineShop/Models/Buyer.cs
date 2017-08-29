@@ -256,12 +256,25 @@ namespace OnlineShop.Models
       orderId.Value = _id;
       cmd.Parameters.Add(orderId);
 
+      List<Order> buyerOrders = GetAllOrders();
+      List<Address> buyerAddresses = GetAddresses();
+
       cmd.ExecuteNonQuery();
 
       conn.Close();
       if(conn != null)
       {
         conn.Dispose();
+      }
+
+      foreach(var order in buyerOrders)
+      {
+        order.Delete();
+      }
+
+      foreach(var address in buyerAddresses)
+      {
+        address.Delete();
       }
     }
 
@@ -297,13 +310,84 @@ namespace OnlineShop.Models
       return allBuyers;
     }
 
+    public List<Order> GetAllOrders()
+    {
+      List<Order> allOrders = new List<Order> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM orders WHERE buyer_id = @buyerId;";
+
+      MySqlParameter buyerIdParameter = new MySqlParameter();
+      buyerIdParameter.ParameterName = "@buyerId";
+      buyerIdParameter.Value = _id;
+      cmd.Parameters.Add(buyerIdParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      while(rdr.Read())
+      {
+        int readId = rdr.GetInt32(0);
+        int buyerId = rdr.GetInt32(1);
+        DateTime checkoutDate = rdr.GetDateTime(2);
+        bool purchased = rdr.GetBoolean(3);
+
+        Order newOrder = new Order(buyerId, checkoutDate, purchased, readId);
+        allOrders.Add(newOrder);
+      }
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      return allOrders;
+    }
+
+    public List<Address> GetAddresses()
+    {
+      List<Address> buyerAddresses = new List<Address>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM addresses WHERE buyer_id = @thisId;";
+
+      MySqlParameter buyerIdParameter = new MySqlParameter();
+      buyerIdParameter.ParameterName = "@thisId";
+      buyerIdParameter.Value = _id;
+      cmd.Parameters.Add(buyerIdParameter);
+
+      var rdr = cmd.ExecuteReader();
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        int buyerId = rdr.GetInt32(1);
+        string name = rdr.GetString(2);
+        string street = rdr.GetString(3);
+        string city = rdr.GetString(4);
+        string state = rdr.GetString(5);
+        string country = rdr.GetString(6);
+        string zip = rdr.GetString(7);
+        Address newAddress = new Address(buyerId,name,street,city,state,country,zip,id);
+        buyerAddresses.Add(newAddress);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return buyerAddresses;
+    }
+
     public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM buyers;";
+      cmd.CommandText = @"DELETE FROM buyers; DELETE FROM orders; DELETE FROM items_orders; DELETE FROM addresses;";
 
       cmd.ExecuteNonQuery();
       conn.Close();

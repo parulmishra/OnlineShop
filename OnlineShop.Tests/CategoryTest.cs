@@ -14,8 +14,12 @@ namespace OnlineShop.Tests
     }
     public void Dispose()
     {
-     Category.DeleteAll();
-     Product.DeleteAll();
+      Category.DeleteAll();
+      Product.DeleteAll();
+      Item.DeleteAll();
+      Address.DeleteAll();
+      Buyer.DeleteAll();
+      Order.DeleteAll();
     }
     [TestMethod]
     public void Equals_TrueForSameCategoryName_True()
@@ -90,10 +94,36 @@ namespace OnlineShop.Tests
 
       List<Product> actualProductList = testCategory1.GetProducts();
       List<Product> expectedProductList = new List<Product>();
-      
+
       expectedProductList.Add(newProduct);
       //Assert
       CollectionAssert.AreEqual(expectedProductList,actualProductList);
+    }
+
+    [TestMethod]
+    public void Delete_DeletesRelationsInDatabaseWhenRemovingEntireCategory_ItemList()
+    {
+      Category shirts = new Category("shirts");
+      shirts.Save();
+      Category pants = new Category("pants");
+      pants.Save();
+
+      Product tshirt = new Product(shirts.GetId(),"Adidas","Jeans",100.0,"good quality","Amazon","image");
+      tshirt.Save();
+
+      Product jeans = new Product(pants.GetId(), "Levis", "Jeans", 29.85, "ripped jeans", "Levi", "image");
+
+      Item one = new Item("small", "red", tshirt.GetId());
+      Item two = new Item("medium", "blue", pants.GetId());
+      one.Save();
+      two.Save();
+
+      shirts.Delete();
+
+      List<Item> expected = new List<Item> {two};
+      List<Item> actual = Item.GetAll();
+
+      CollectionAssert.AreEqual(expected, actual);
     }
   }
 }
