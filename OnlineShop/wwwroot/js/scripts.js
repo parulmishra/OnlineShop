@@ -27,5 +27,4 @@ $(document).ready(function(){
       '<input type="text" class="form-control" name="buyer-address-zip' + clickedAmount + '">' +
     '</div>')
   });
-
 });

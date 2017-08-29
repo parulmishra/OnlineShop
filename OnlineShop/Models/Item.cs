@@ -244,5 +244,6 @@ namespace OnlineShop.Models
       {
         conn.Dispose();
       }
+    }
   }
 }
