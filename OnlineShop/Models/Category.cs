@@ -150,5 +150,42 @@ namespace OnlineShop.Models
       }
       return category;
     }
+    public List<Product> GetProducts()
+    {
+      List<Product> productsForThisCategory = new List<Product>();
+      MySqlConnection conn =DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId";
+
+      MySqlParameter categoryIdParameter = new MySqlParameter();
+      categoryIdParameter.ParameterName = "@categoryId";
+      categoryIdParameter.Value = this._id;
+      cmd.Parameters.Add(categoryIdParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      int productId = 0;
+      int categoryId = 0;
+      string brand = "";
+      double price = 0.0;
+      string description = "";
+      string seller = "";
+      string image = "";
+
+      while(rdr.Read())
+      {
+       productId = rdr.GetInt32(0);
+       categoryId = rdr.GetInt32(1);
+       brand = rdr.GetString(2);
+       price = rdr.GetDouble(3);
+       description = rdr.GetString(4);
+       seller = rdr.GetString(5);
+       image = rdr.GetString(6);
+       var product = new Product(categoryId,brand,price,description,seller,image,productId);
+       productsForThisCategory.Add(product);
+      }
+      return productsForThisCategory;
+    }
    }
 }
