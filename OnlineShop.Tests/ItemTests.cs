@@ -63,7 +63,7 @@ namespace OnlineShop.Tests
     [TestMethod]
     public void GetProductInfo_ReturnsProductOfItem_Product()
     {
-      Product shoes = new Product(1, "Adidas", 15.99, "Running shoes", "Fred Meyer", "");
+      Product shoes = new Product(1, "Adidas","Shoes", 15.99, "Running shoes", "Fred Meyer", "");
       shoes.Save();
 
       Item myShoes = new Item("Small", "Red", shoes.GetId());

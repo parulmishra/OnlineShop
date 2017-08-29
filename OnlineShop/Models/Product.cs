@@ -9,15 +9,17 @@ namespace OnlineShop.Models
     private int _id;
     private int _category_id;
     private string _brand;
+    private string _name;
     double _price;
     private string _description;
     private string _seller;
     private string _image;
 
-    public Product(int categoryId, string brand, double price, string description, string seller, string image,int id= 0)
+    public Product(int categoryId, string brand, string name, double price, string description, string seller, string image,int id= 0)
     {
       _category_id = categoryId;
       _brand = brand;
+      _name = name;
       _price = price;
       _description = description;
       _seller = seller;
@@ -35,6 +37,10 @@ namespace OnlineShop.Models
     public string GetBrand()
     {
       return _brand;
+    }
+    public string GetName()
+    {
+      return _name;
     }
     public double GetPrice()
     {
@@ -64,11 +70,12 @@ namespace OnlineShop.Models
         bool idEquality = newProduct.GetId() == this._id;
         bool categoryIdEquality = newProduct.GetCategoryId() == this._category_id;
         bool brandEquality = newProduct.GetBrand() == this._brand;
+        bool nameEquality = newProduct.GetName() == this._name;
         bool priceEquality = newProduct.GetPrice() == this._price;
         bool descriptionEquality = newProduct.GetDescription() == this._description;
         bool sellerEquality = newProduct.GetSeller() == this._seller;
         bool imageEquality = newProduct.GetImage() == this._image;
-        return (idEquality && categoryIdEquality && brandEquality && priceEquality && descriptionEquality && sellerEquality && imageEquality);
+        return (idEquality && categoryIdEquality && brandEquality && priceEquality && descriptionEquality && sellerEquality && imageEquality && nameEquality);
       }
     }
     public override int GetHashCode()
@@ -80,7 +87,7 @@ namespace OnlineShop.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO products(category_id,brand,price,description,seller,image) VALUES (@category_id,@brand,@price,@description,@seller,@image);";
+      cmd.CommandText = @"INSERT INTO products(category_id,brand,name,price,description,seller,image) VALUES (@category_id,@brand,@name,@price,@description,@seller,@image);";
 
       MySqlParameter categoryIdParameter = new MySqlParameter();
       categoryIdParameter.ParameterName = "@category_id";
@@ -91,6 +98,11 @@ namespace OnlineShop.Models
       brandParameter.ParameterName = "@brand";
       brandParameter.Value = _brand;
       cmd.Parameters.Add(brandParameter);
+
+      MySqlParameter nameParameter = new MySqlParameter();
+      nameParameter.ParameterName = "@name";
+      nameParameter.Value = _name;
+      cmd.Parameters.Add(nameParameter);
 
       MySqlParameter priceParameter = new MySqlParameter();
       priceParameter.ParameterName = "@price";
@@ -135,11 +147,12 @@ namespace OnlineShop.Models
         int id = rdr.GetInt32(0);
         int category_id = rdr.GetInt32(1);
         string brand = rdr.GetString(2);
-        double price  = rdr.GetDouble(3);
-        string description = rdr.GetString(4);
-        string seller = rdr.GetString(5);
-        string image = rdr.GetString(6);
-        Product newProduct = new Product(category_id,brand,price,description,seller,image,id);
+        string name = rdr.GetString(3);
+        double price  = rdr.GetDouble(4);
+        string description = rdr.GetString(5);
+        string seller = rdr.GetString(6);
+        string image = rdr.GetString(7);
+        Product newProduct = new Product(category_id,brand,name,price,description,seller,image,id);
         allProducts.Add(newProduct);
       }
       conn.Close();
@@ -220,6 +233,7 @@ namespace OnlineShop.Models
       int idProduct = 0;
       int idCategory = 0;
       string brand = "";
+      string name = "";
       double price = 0.0;
       string description = "";
       string seller = "";
@@ -230,12 +244,13 @@ namespace OnlineShop.Models
         idProduct = rdr.GetInt32(0);
         idCategory = rdr.GetInt32(1);
         brand = rdr.GetString(2);
-        price = rdr.GetDouble(3);
-        description = rdr.GetString(4);
-        seller = rdr.GetString(5);
-        image = rdr.GetString(6);
+        name = rdr.GetString(3);
+        price = rdr.GetDouble(4);
+        description = rdr.GetString(5);
+        seller = rdr.GetString(6);
+        image = rdr.GetString(7);
       }
-      var product = new Product(idCategory,brand,price,description,seller,image,idProduct);
+      var product = new Product(idCategory,brand,name,price,description,seller,image,idProduct);
 
       conn.Close();
       if (conn != null)
@@ -265,12 +280,13 @@ namespace OnlineShop.Models
         int productId = rdr.GetInt32(0);
         int categoryId = rdr.GetInt32(1);
         string productBrand = rdr.GetString(2);
-        double price = rdr.GetDouble(3);
-        string description = rdr.GetString(4);
-        string seller = rdr.GetString(5);
-        string image = rdr.GetString(6);
+        string name = rdr.GetString(3);
+        double price = rdr.GetDouble(4);
+        string description = rdr.GetString(5);
+        string seller = rdr.GetString(6);
+        string image = rdr.GetString(7);
 
-        Product newProduct = new Product(categoryId,productBrand,price,description,seller,image,productId);
+        Product newProduct = new Product(categoryId,productBrand,name,price,description,seller,image,productId);
         foundProducts.Add(newProduct);
       }
       conn.Close();
@@ -294,19 +310,16 @@ namespace OnlineShop.Models
       cmd.Parameters.Add(productIdParameter);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int itemId = 0;
-      int productId = 0;
-      string size = "";
-      string color = "";
-      bool available = true;
+
       while(rdr.Read())
       {
-         itemId = rdr.GetInt32(0);
-         productId = rdr.GetInt32(1);
-         size = rdr.GetString(2);
-         color = rdr.GetString(3);
-         available = rdr.GetBoolean(4);
-         var item = new Item(productId,size,color,available,itemId);
+         int itemId = rdr.GetInt32(0);
+         int productId = rdr.GetInt32(1);
+         string size = rdr.GetString(2);
+         string color = rdr.GetString(3);
+         bool available = rdr.GetBoolean(4);
+
+         Item item = new Item(size,color,productId,available,itemId);
          itemsForThisProduct.Add(item);
       }
       return itemsForThisProduct;
