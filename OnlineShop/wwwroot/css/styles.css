@@ -43,12 +43,12 @@ body {
   margin: 10px;
 }
 #myCarousel{
-  background-color: #fffbf7;
-
+  background-color: #fff;
 }
 .featured-carousel img{
- height: 600px;
+ height: auto;
  width: auto;
+ max-height: 500px;
  padding: 50px;
 }
 .carousel-indicators li {
@@ -177,12 +177,12 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   margin-top:30px;
 }
 /* Cart page */
-.item img
+.product img
 {
   max-width: 50px;
   max-height: 50px;
 }
-.item *
+.product *
 {
   margin: 20px;
   display: inline-block;;
@@ -204,4 +204,17 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 {
   margin-top: 30px;
   height: 400px;
+}
+
+/* Buyer Detail Page */
+
+.product-history img{
+  width: 50px;
+  height: 50px;
+}
+
+.product-history *
+{
+  margin: 20px;
+  display: inline-block;;
 }
