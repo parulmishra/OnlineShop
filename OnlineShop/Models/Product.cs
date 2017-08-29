@@ -137,8 +137,8 @@ namespace OnlineShop.Models
       List<Product> allProducts = new List<Product>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
-
       var cmd = conn.CreateCommand() as MySqlCommand;
+
       cmd.CommandText = @"SELECT * FROM products;";
 
       var rdr = cmd.ExecuteReader();
@@ -168,7 +168,7 @@ namespace OnlineShop.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM products;";
+      cmd.CommandText = @"DELETE FROM products; DELETE FROM items; DELETE FROM items_orders;";
 
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -188,6 +188,12 @@ namespace OnlineShop.Models
       idParameter.ParameterName = "@thisId";
       idParameter.Value = _id;
       cmd.Parameters.Add(idParameter);
+
+      List<Item> productItems = GetItems();
+      foreach(var item in productItems)
+      {
+        item.Delete();
+      }
 
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -267,7 +273,7 @@ namespace OnlineShop.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM products WHERE brand LIKE @wildCard;";
+      cmd.CommandText = @"SELECT * FROM products WHERE brand LIKE @wildCard OR name LIKE @wildCard;";
 
       MySqlParameter searchTermParameter = new MySqlParameter();
       searchTermParameter.ParameterName = "@wildCard";

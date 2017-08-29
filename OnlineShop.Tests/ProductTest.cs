@@ -14,8 +14,12 @@ namespace OnlineShop.Tests
     }
     public void Dispose()
     {
-     Category.DeleteAll();
-     Product.DeleteAll();
+      Category.DeleteAll();
+      Product.DeleteAll();
+      Item.DeleteAll();
+      Address.DeleteAll();
+      Buyer.DeleteAll();
+      Order.DeleteAll();
     }
     [TestMethod]
     public void Equals_TrueForSameProductProperties_True()
