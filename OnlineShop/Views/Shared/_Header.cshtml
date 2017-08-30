@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Online Shop</a>
+      <a class="navbar-brand" href='/@Model["buyer"].GetId()'>Online Shop</a>
     </div>
 
     <form action="" autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
@@ -39,14 +39,21 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Cart</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Order History</a></li>
-            <li><a href="#">Edit profile</a></li>
-          </ul>
-        </li>
+        <li><a href='/cart/@Model["buyer"].GetId()'>Cart</a></li>
+        @if(Model["buyer"].GetId()!=0)
+        {
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Model["buyer"].GetUsername() <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Order History</a></li>
+              <li><a href="#">Edit profile</a></li>
+            </ul>
+          </li>
+        }
+        else{
+          <li><a href="/login">Log in</a></li>
+        }
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

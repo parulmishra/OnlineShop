@@ -8,9 +8,10 @@
         <div class="row address-options buy-options">
           <label>Ship To:</label>
           <select class="shipping_address">
-            <option>address1</option>
-            <option>address2</option>
-            <option>address2</option>
+            @foreach(var address in Model["buyer"].GetAddresses())
+            {
+                <option>@address.GetName()</option>
+            }
           </select>
           <p>Or</p>
           <button type="button" class="btn btn-info" name="shipping_address" id="shipping_address">Add New Shipping Address</button>
@@ -59,35 +60,35 @@
      </div>
     <div class="col-md-3">
       <div class="well order_details">
-        <div class="container">
+
+
           <h4>Order Details</h4>
-          <div class ="product">
-            <p>Item1</p>
-            <p>Price</p>
-          </div>
 
-          <div class ="product">
-            <p>Item1</p>
-            <p>Price</p>
-          </div>
+          @foreach (var item in @Model["items"])
+          {
+            <div class ="product">
 
-          <div class ="product">
-            <p>Item1</p>
-            <p>Price</p>
-          </div>
+              <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
+              <p>@item.GetColor() @item.GetProductInfo().GetName()</p>
+              <p>@item.GetSize() </p>
+              <p>@item.GetProductInfo().GetBrand()</p>
+              <p>Price: @item.GetProductInfo().GetPrice()</p>
+                </div>
+          }
+
 
         </div>
-      </div>
+
     </div>
 
     <div class="col-md-4">
       <div class="well bill_details">
         <div class="container">
           <h4>Bill Details</h4>
-          <h5>Total Items:</h5>
-          <h5>Total Items Cost:</h5>
-          <h5 id="shipping_cost">Shipping Cost:</h5>
-          <h5>Tax:</h5>
+          <h5>Total Items: @Model["order"].GetItems().Count</h5>
+          <h5>Total Items Cost: $@Model["order"].GetSubtotal()</h5>
+          <h5 id="shipping_cost">Shipping Cost: $@((int)@Model["order"].GetSubtotal()/15)</h5>
+          <h5>Tax:$@((int)@Model["order"].GetSubtotal()/10)</h5>
         </div>
       </div>
     </div>

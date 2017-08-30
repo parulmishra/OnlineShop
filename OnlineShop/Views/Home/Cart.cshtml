@@ -2,41 +2,37 @@
   Layout = "_Layout";
 }
 <div class="page-header" id="featured-header">
-  <h1>Cart Details</h1>
+  <h1>Cart Details for @Model["buyer"].GetUsername()</h1>
 </div>
 
 <div class="container">
+
+@foreach(var item in @Model["items"])
+{
   <div class="well">
     <div class ="product">
-      <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-      <p>Item1</p>
-      <p>Price</p>
-      <button type="button" class="btn btn-danger" name="delete_button">Delete</button>
+      <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
+      <p>@item.GetProductInfo().GetName()</p>
+      <p>@item.GetProductInfo().GetBrand()</p>
+      <p>@item.GetColor()</p>
+      <p>@item.GetSize()</p>
+      <p class="price">@item.GetProductInfo().GetPrice()</p>
+      <form action='/cart/@Model["buyer"].GetId()/removed' method="post">
+        <input type="hidden" value='@item.GetId()' name="item-id">
+        <button type="submit" class="btn btn-danger" name="delete_button">Delete</button>
+      </form>
     </div>
   </div>
+}
 
-  <div class="well">
-    <div class ="product">
-      <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-      <p>Item1</p>
-      <p>Price</p>
-      <button type="button" class="btn btn-danger" name="delete_button">Delete</button>
-    </div>
-  </div>
+<form action='/cart/@Model["buyer"].GetId()/removed/all' method="post">
+  <button type="submit" class="btn btn-danger" name="delete_button">Delete All</button>
+</form>
 
-  <div class="well">
-    <div class ="product">
-      <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-      <p>Item1</p>
-      <p>Price</p>
-      <button type="button" class="btn btn-danger" name="delete_button">Delete</button>
-    </div>
-  </div>
+<h3>Total</h3>
 
-  <button type="button" class="btn btn-danger" name="delete_button">Delete All</button>
-
-  <h3>Total</h3>
-
-  <button type="button" class="btn btn-info" name="order_button">Place an Order</button>
+<form action = '/order/@Model["buyer"].GetId()' method="post">
+  <button type="submit" class="btn btn-info" name="order_button">Place an Order</button>
+</form>
 
 </div>
