@@ -23,7 +23,7 @@
   {
 
       <div class="column category-product">
-        <a href="/products/details/@product.GetId()"><img src="@product.GetImage()"></a>
+        <a href='/products/details/@product.GetId()/@Model["buyer"].GetId()'><img src="@product.GetImage()"></a>
         <div class="brand-description">
           <a href="/products/details/@product.GetId()">@product.GetBrand()</a><br>
           <a href="/products/details/@product.GetId()">@product.GetDescription()</a><br>

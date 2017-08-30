@@ -62,28 +62,28 @@ namespace OnlineShop.Controllers
 
       return View("Index",model);
     }
-    [HttpGet("/categories/{id}")]
-    public ActionResult CategoryView(int id)
+    [HttpGet("/categories/{catId}/{buyerId}")]
+    public ActionResult CategoryView(int catId, int buyerId)
     {
       Dictionary<string,object> Model = new Dictionary<string,object>();
       List<Category> allCategories = Category.GetAll();
       List<Product> allProducts = Product.GetAll();
-      Buyer newBuyer = Buyer.Find(0);
+      Buyer newBuyer = Buyer.Find(buyerId);
       Model.Add("categories", allCategories);
-      Model.Add("selectedCategory", Category.Find(id));
+      Model.Add("selectedCategory", Category.Find(catId));
       Model.Add("products",allProducts);
       Model.Add("buyer",newBuyer);
       return View("Category",Model);
     }
-    [HttpGet("/products/details/{id}")]
-    public ActionResult ProductDetails(int id)
+    [HttpGet("/products/details/{prodId}/{buyerId}")]
+    public ActionResult ProductDetails(int prodId, int buyerId)
     {
       Dictionary<string, object> Model = new Dictionary<string,object>();
       List<Category> allCategories = Category.GetAll();
       Model.Add("categories", allCategories);
-      Buyer newBuyer = Buyer.Find(0);
+      Buyer newBuyer = Buyer.Find(buyerId);
       Model.Add("buyer",newBuyer);
-      Product newProduct = Product.Find(id);
+      Product newProduct = Product.Find(prodId);
       Model.Add("product",newProduct);
       Model.Add("items",newProduct.GetItems());
       return View(Model);
@@ -130,7 +130,7 @@ namespace OnlineShop.Controllers
       Dictionary<string,object> Model = new Dictionary<string,object>();
       List<Category> allCategories = Category.GetAll();
       List<Product> allProducts = Product.GetAll();
-      Buyer newBuyer = Buyer.Find(1);
+      Buyer newBuyer = Buyer.Find(id);
       List<Order> OrdersForThisBuyer = newBuyer.GetOrderHistory();
       Model.Add("categories", allCategories);
       Model.Add("buyer",newBuyer);
@@ -143,18 +143,20 @@ namespace OnlineShop.Controllers
 	  {
       Dictionary<string, object> Model = new Dictionary<string,object>();
       List<Category> allCategories = Category.GetAll();
-      Buyer newBuyer = Buyer.Find(0);
+      Buyer newBuyer = Buyer.Find(id);
       string name = Request.Form["buyer-name"];
       string password = Request.Form["buyer-password"];
       string phone = Request.Form["buyer-phone"];
       string email = Request.Form["buyer-email"];
       string cardNumber = Request.Form["buyer-card-number"];
+
+      newBuyer.Update(name,phone,email,password,cardNumber);
       Model.Add("categories", allCategories);
       Model.Add("buyer",newBuyer);
       return View("BuyerDetail",Model);
 	  }
-    [HttpGet("/cart")]
-    public ActionResult Cart()
+    [HttpGet("/cart/{id}")]
+    public ActionResult Cart(int id)
     {
       Dictionary<string, object> model = new Dictionary<string,object>{};
       Buyer selectedBuyer = Buyer.Find(0);
@@ -210,7 +212,7 @@ namespace OnlineShop.Controllers
       return View("Cart", model);
     }
     [HttpPost("/order/{id}")]
-    public ActionResult Order(int id)
+    public ActionResult OrderPost(int id)
     {
       Dictionary<string, object> model = new Dictionary<string,object>{};
 
@@ -226,7 +228,7 @@ namespace OnlineShop.Controllers
       model.Add("buyer", selectedBuyer);
 
 
-      return View(model);
+      return View("Order", model);
     }
 
     [HttpGet("/login")]
@@ -279,22 +281,32 @@ namespace OnlineShop.Controllers
         return View("Index", model);
       }
     }
-    [HttpGet("/detail")]
-    public ActionResult BuyerDetail()
+
+    [HttpGet("/updateBuyerInfo/{id}")]
+    public ActionResult updateBuyerInfo(int id)
     {
-      Dictionary<string,object> Model = new Dictionary<string,object>();
-      List<Category> allCategories = Category.GetAll();
+      Dictionary<string, object> model = new Dictionary<string,object>{};
+      Buyer selectedBuyer = Buyer.Find(id);
+      // model.Add("products", buyerProducts);
+      model.Add("categories", Category.GetAll());
+      model.Add("buyer", selectedBuyer);
 
-      Buyer newBuyer = Buyer.Find(1);
-      List<Order> OrdersForThisBuyer = newBuyer.GetOrderHistory();
-      
-      List<Address> addresses = newBuyer.GetAddresses();
-      Model.Add("addresses",addresses);
-      Model.Add("categories", allCategories);
-      Model.Add("buyer",newBuyer);
+      return View("updateBuyerInfo", model);
+    }
 
-      Model.Add("orders",OrdersForThisBuyer);
-      return View(Model);
+    [HttpPost("/receipt/{orderId}/{buyerId}")]
+    public ActionResult Receipt(int orderId, int buyerId)
+    {
+      Dictionary<string, object> model = new Dictionary<string,object>{};
+      Buyer selectedBuyer = Buyer.Find(buyerId);
+      // model.Add("products", buyerProducts);
+      model.Add("categories", Category.GetAll());
+      model.Add("buyer", selectedBuyer);
+      model.Add("order", Order.Find(orderId));
+      model.Add("address", Address.Find(int.Parse(Request.Form["address-select"])));
+      Order.Find(orderId).Purchase();
+
+      return View(model);
     }
   }
 }

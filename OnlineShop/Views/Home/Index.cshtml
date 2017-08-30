@@ -26,7 +26,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div class="item featured-carousel active">
-          <a href='/products/@Model["featured"].GetId()'>
+          <a href='/products/details/@Model["featured"].GetId()/@Model["buyer"].GetId()'>
           <div class="row">
             <div class="col-md-6 carousel-image">
               <img src='@Model["featured"].GetImage()' alt='@Model["featured"].GetName()' style="width:100%;">
@@ -43,7 +43,7 @@
         @foreach (var product in @Model["products"])
         {
             <div class="item featured-carousel">
-              <a href="/products/@product.GetId()">
+              <a href='/products/details/@product.GetId()/@Model["buyer"].GetId()'>
               <div class="row">
                 <div class="col-md-6 carousel-image">
                   <img src="@product.GetImage()" alt="@product.GetName()" style="width:100%;">
