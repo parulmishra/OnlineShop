@@ -157,17 +157,14 @@ namespace OnlineShop.Controllers
     public ActionResult Cart()
     {
       Dictionary<string, object> model = new Dictionary<string,object>{};
-
-      Buyer selectedBuyer = Buyer.Find(id);
+      Buyer selectedBuyer = Buyer.Find(0);
       Order buyerOrder = selectedBuyer.GetCurrentOrder();
       List<Item> buyerItems = buyerOrder.GetItems();
-
       model.Add("order", buyerOrder);
       model.Add("items", buyerItems);
       // model.Add("products", buyerProducts);
       model.Add("categories", Category.GetAll());
       model.Add("buyer", selectedBuyer);
-
       return View(model);
     }
 
@@ -201,7 +198,6 @@ namespace OnlineShop.Controllers
       Buyer selectedBuyer = Buyer.Find(id);
       Order buyerOrder = selectedBuyer.GetCurrentOrder();
 
-
       selectedBuyer.GetCurrentOrder().RemoveAllItems();
       List<Item> buyerItems = buyerOrder.GetItems();
 
@@ -211,10 +207,8 @@ namespace OnlineShop.Controllers
       model.Add("categories", Category.GetAll());
       model.Add("buyer", selectedBuyer);
 
-
       return View("Cart", model);
     }
-
     [HttpPost("/order/{id}")]
     public ActionResult Order(int id)
     {
@@ -284,13 +278,23 @@ namespace OnlineShop.Controllers
         model.Add("products", newFeatured);
         return View("Index", model);
       }
-
     }
-
     [HttpGet("/detail")]
     public ActionResult BuyerDetail()
     {
-        return View();
+      Dictionary<string,object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+
+      Buyer newBuyer = Buyer.Find(1);
+      List<Order> OrdersForThisBuyer = newBuyer.GetOrderHistory();
+      
+      List<Address> addresses = newBuyer.GetAddresses();
+      Model.Add("addresses",addresses);
+      Model.Add("categories", allCategories);
+      Model.Add("buyer",newBuyer);
+
+      Model.Add("orders",OrdersForThisBuyer);
+      return View(Model);
     }
   }
 }
