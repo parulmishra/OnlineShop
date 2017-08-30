@@ -6,12 +6,33 @@
   <div class="page-header" >
     <h1>Your Info:</h1>
   </div>
-
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <h3>Order History:</h3>
-      <div class="product-history">
+      @if(Model != null )
+      {
+        <h3>Order History:</h3>
+        <div class="product-history">
+        @foreach(var order in Model["orders"])
+        {
+          @foreach(var item in order.GetItems())
+          {
+            <div class= "row">
+              <img src="@item.GetProductInfo().GetImage()" alt="tshirt">
+              <p>Name : @item.GetProductInfo().GetName()</p>
+              <p>Price : @item.GetProductInfo().GetPrice()</p>
+              <p>Purchased Date : @order.GetCheckoutDate()</p>
+            </div>
+          }
+        }
+        </div>
+      }
+      </div>
+
+
+
+      @* <div class="product-history">
         <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
         <p>Item1</p>
         <p>Price</p>
@@ -37,29 +58,24 @@
         <p>Item1</p>
         <p>Price</p>
         <p>Purchase Date:</p>
-      </div>
+      </div> *@
 
-      <div class="product-history">
-        <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-        <p>Item1</p>
-        <p>Price</p>
-        <p>Purchase Date:</p>
-      </div>
-    </div>
 
     <!-- Edit Info Area -->
-
+@if(Model != null)
+{
     <div class="col-md-4">
       <div class="well">
-        <p><span class="info-category">Name: </span>Jesse</p>
-        <p><span class="info-category">Email: </span>jesse.bryan22@@gmail.com</p><br>
-        <p><span class="info-category">Address</span></p>
-        <p><span class="info-category">Street: </span>123 Fun Ln</p>
-        <p><span class="info-category">City: </span>Seattle</p>
-        <p><span class="info-category">State: </span>WA</p>
-        <p><span class="info-category">Zip: </span>98125</p>
-        <p><span class="info-category">Country: </span>USA</p>
+        <p span class="info-category">Name : @Model["buyer"].GetUsername()</p>
+        <p span class="info-category">Emails :  @Model["buyer"].GetEmail()</p><br>
+        <p class="info-category">Address : @Model["addresses"][0].GetName()</p>
+        <p class="info-category">Street : @Model["addresses"][0].GetStreet()</p>
+        <p class="info-category">City : @Model["addresses"][0].GetCity()</p>
+        <p class="info-category">State : @Model["addresses"][0].GetState()</p>
+        <p class="info-category">Zip : @Model["addresses"][0].GetZip()</p>
+        <p class="info-category">Country : @Model["addresses"][0].GetCountry()</p>
       </div>
     </div>
+  }
   </div>
 </div>
