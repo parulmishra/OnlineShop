@@ -51,14 +51,71 @@ _This site uses a SQL database to track the purcashes of clothing items in an on
 * This website will be hosted on GitHub
 * https://github.com/parulmishra/OnlineShop
 
-<!-- ##### Database Creation/Setup - Commands
-1. CREATE DATABASE online_shop;
-2. USE band_tracker;
-3. CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR (255));
-4. CREATE TABLE venues (id serial PRIMARY KEY, name VARCHAR (255));
-5. CREATE TABLE bands_venues (id serial PRIMARY KEY, band_id int, venue_id int);
+##### Database Creation/Setup - Commands
+CREATE DATABASE IF NOT EXISTS `online_shop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `online_shop`;
 
-* The DB band_tracker_test is used for MST Unit testing -->
+CREATE TABLE `addresses` (
+  `id` int(11) NOT NULL,
+  `buyer_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `zip` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `buyers` (
+  `id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  `credit_card` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `available` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `items_orders` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `buyer_id` int(11) NOT NULL,
+  `checkout_date` datetime NOT NULL,
+  `purchased` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `brand` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` double(11,2) NOT NULL,
+  `description` text NOT NULL,
+  `seller` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+* The DB online_shop_test is used for MST Unit testing
 
 ## Technologies Used
 

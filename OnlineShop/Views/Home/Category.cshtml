@@ -3,8 +3,6 @@
 }
 
 <div class="page-header" id="featured-header">
-  <h1>[Category Name]</h1>
-</div>
 
 <div class="row sort-by">
   <label>Sort By:</label>
@@ -18,62 +16,20 @@
 </div>
 
 <!-- FOREACH loop to create product rows -->
-
+@if(Model != null )
+{
   <div class="row products">
-    <div class="column category-product">
-      <a href="/products/details"><img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="Los Angeles" style="width:100%;"></a>
-      <div class="brand-description">
-        <a href="#">[Brand Name]</a><br>
-        <a href="#">[Short Description or Product Name]</a><br>
-        <a href="#">[Price]</a>
-      </div>
-    </div>
+  @foreach(var product in Model["selectedCategory"].GetProducts())
+  {
 
-    <div class="column category-product">
-      <a href="#"><img src="http://pngimg.com/uploads/socks/socks_PNG8264.png?i=1" alt="Los Angeles" style="width:100%;"></a>
-      <div class="brand-description">
-        <a href="#">[Brand Name]</a><br>
-        <a href="#">[Short Description or Product Name]</a><br>
-        <a href="#">[Price]</a>
+      <div class="column category-product">
+        <a href="/products/details/@product.GetId()"><img src="@product.GetImage()"></a>
+        <div class="brand-description">
+          <a href="/products/details/@product.GetId()">@product.GetBrand()</a><br>
+          <a href="/products/details/@product.GetId()">@product.GetDescription()</a><br>
+          <a href="/products/details/@product.GetId()">@product.GetPrice()</a>
+        </div>
       </div>
-    </div>
-
-    <div class="column category-product">
-      <a href="#"><img src="http://www.pngmart.com/files/1/Mens-Pant-PNG-HD.png" alt="Pants" style="width:100%;"></a>
-      <div class="brand-description">
-        <a href="#">[Brand Name]</a><br>
-        <a href="#">[Short Description or Product Name]</a><br>
-        <a href="#">[Price]</a>
-      </div>
-    </div>
-
+  }
   </div>
-
-  <div class="row products">
-    <div class="column category-product">
-      <a href="/products/details"><img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="Los Angeles" style="width:100%;"></a>
-      <div class="brand-description">
-        <a href="#">[Brand Name]</a><br>
-        <a href="#">[Short Description or Product Name]</a><br>
-        <a href="#">[Price]</a>
-      </div>
-    </div>
-
-    <div class="column category-product">
-      <a href="#"><img src="http://pngimg.com/uploads/socks/socks_PNG8264.png?i=1" alt="Los Angeles" style="width:100%;"></a>
-      <div class="brand-description">
-        <a href="#">[Brand Name]</a><br>
-        <a href="#">[Short Description or Product Name]</a><br>
-        <a href="#">[Price]</a>
-      </div>
-    </div>
-
-    <div class="column category-product">
-      <a href="#"><img src="http://www.pngmart.com/files/1/Mens-Pant-PNG-HD.png" alt="Pants" style="width:100%;"></a>
-      <div class="brand-description">
-        <a href="#">[Brand Name]</a><br>
-        <a href="#">[Short Description or Product Name]</a><br>
-        <a href="#">[Price]</a>
-      </div>
-    </div>
-  </div>
+}

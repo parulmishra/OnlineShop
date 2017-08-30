@@ -62,23 +62,99 @@ namespace OnlineShop.Controllers
 
       return View("Index",model);
     }
-    [HttpGet("/products/details")]
-    public ActionResult ProductDetails()
+    [HttpGet("/categories/{id}")]
+    public ActionResult CategoryView(int id)
     {
-        return View();
+      Dictionary<string,object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      List<Product> allProducts = Product.GetAll();
+      Buyer newBuyer = Buyer.Find(0);
+      Model.Add("categories", allCategories);
+      Model.Add("selectedCategory", Category.Find(id));
+      Model.Add("products",allProducts);
+      Model.Add("buyer",newBuyer);
+      return View("Category",Model);
     }
-    [HttpGet("/category")]
-    public ActionResult CategoryView()
+    [HttpGet("/products/details/{id}")]
+    public ActionResult ProductDetails(int id)
     {
-        return View("Category");
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      Model.Add("categories", allCategories);
+      Buyer newBuyer = Buyer.Find(0);
+      Model.Add("buyer",newBuyer);
+      Product newProduct = Product.Find(id);
+      Model.Add("product",newProduct);
+      Model.Add("items",newProduct.GetItems());
+      return View(Model);
     }
+
     [HttpGet("/buyerform/add")]
     public ActionResult BuyerForm()
     {
-        return View();
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      Model.Add("categories",allCategories);
+      return View(Model);
     }
-    [HttpGet("/cart/{id}")]
-    public ActionResult Cart(int id)
+    [HttpPost("/buyerdetails")]
+    public ActionResult BuyerFormAdd()
+    {
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      List<Address> addresses = new List<Address>();
+      string name = Request.Form["buyer-name"];
+      string password = Request.Form["buyer-password"];
+      string phone = Request.Form["buyer-phone"];
+      string email = Request.Form["buyer-email"];
+      string cardNumber = Request.Form["buyer-card-number"];
+      string addressType = Request.Form["buyer-address-type"];
+      string street = Request.Form["buyer-address-street"];
+      string city = Request.Form["buyer-address-city"];
+      string state = Request.Form["buyer-address-state"];
+      string country = Request.Form["buyer-address-country"];
+      string zip = Request.Form["buyer-address-zip"];
+      Buyer newBuyer = new Buyer(name,phone,email,password,cardNumber,0);
+      newBuyer.Save();
+      Address newAddress = new Address(newBuyer.GetId(),addressType,street,city,state,country,zip,0);
+      newAddress.Save();
+      addresses.Add(newAddress);
+      Model.Add("addresses",addresses);
+      Model.Add("buyer",newBuyer);
+      Model.Add("categories",allCategories);
+      return View("BuyerDetail",Model);
+    }
+    [HttpGet("/buyers/update/{id}")]
+	  public ActionResult UpdateBuyerInfoForm(int id)
+	  {
+      Dictionary<string,object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      List<Product> allProducts = Product.GetAll();
+      Buyer newBuyer = Buyer.Find(1);
+      List<Order> OrdersForThisBuyer = newBuyer.GetOrderHistory();
+      Model.Add("categories", allCategories);
+      Model.Add("buyer",newBuyer);
+      Model.Add("products",allProducts);
+      Model.Add("orders",OrdersForThisBuyer);
+      return View("UpdateBuyerInfo",Model);
+	  }
+    [HttpPost("/buyers/update/{id}")]
+	  public ActionResult UpdateBuyerInfo(int id)
+	  {
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      Buyer newBuyer = Buyer.Find(0);
+      string name = Request.Form["buyer-name"];
+      string password = Request.Form["buyer-password"];
+      string phone = Request.Form["buyer-phone"];
+      string email = Request.Form["buyer-email"];
+      string cardNumber = Request.Form["buyer-card-number"];
+      Model.Add("categories", allCategories);
+      Model.Add("buyer",newBuyer);
+      return View("BuyerDetail",Model);
+	  }
+    [HttpGet("/cart")]
+    public ActionResult Cart()
     {
       Dictionary<string, object> model = new Dictionary<string,object>{};
 
