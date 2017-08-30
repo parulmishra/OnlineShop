@@ -30,7 +30,7 @@
           <ul class="dropdown-menu">
             @foreach(var category in Model["categories"])
             {
-                <li><a href="/categories/@category.GetId()">@category.GetName()</a></li>
+                <li><a href='/categories/@category.GetId()/@Model["buyer"].GetId()'>@category.GetName()</a></li>
             }
           </ul>
         </li>
@@ -46,7 +46,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Model["buyer"].GetUsername() <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#">Order History</a></li>
-              <li><a href="#">Edit profile</a></li>
+              <li><a href="/updateBuyerInfo/@Model["buyer"].GetId()">Edit profile</a></li>
             </ul>
           </li>
         }

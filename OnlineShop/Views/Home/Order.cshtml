@@ -1,16 +1,16 @@
 @{
   Layout = "_Layout";
 }
-<form action="/placed" method="">
+<form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
   <div class="well buyer_details">
     <div class="row">
       <div class="col-md-5">
         <div class="row address-options buy-options">
           <label>Ship To:</label>
-          <select class="shipping_address">
+          <select class="shipping_address" name="address-select">
             @foreach(var address in Model["buyer"].GetAddresses())
             {
-                <option>@address.GetName()</option>
+                <option value="@address.GetId()">@address.GetName()</option>
             }
           </select>
           <p>Or</p>
@@ -89,6 +89,8 @@
           <h5>Total Items Cost: $@Model["order"].GetSubtotal()</h5>
           <h5 id="shipping_cost">Shipping Cost: $@((int)@Model["order"].GetSubtotal()/15)</h5>
           <h5>Tax:$@((int)@Model["order"].GetSubtotal()/10)</h5>
+
+          <button type="submit" class="btn btn-success">Place Order</button>
         </div>
       </div>
     </div>
