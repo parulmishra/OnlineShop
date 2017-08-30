@@ -6,7 +6,7 @@
   <div class="row">
     <div class="receipt-container">
       <h2>Order Placed!</h2>
-      <h4>@Model["order"].GetCheckoutDate();
+      <h4>@Model["order"].GetCheckoutDate()
       @foreach (var item in @Model["order"].GetItems())
       {
         <div class ="product">
@@ -15,7 +15,7 @@
           <p>@item.GetColor() @item.GetProductInfo().GetName()</p>
           <p>@item.GetSize() </p>
           <p>@item.GetProductInfo().GetBrand()</p>
-          <p>Price: @item.GetProductInfo().GetPrice()</p>
+          <p>Price: $@item.GetProductInfo().GetPrice()</p>
             </div>
       }
 
