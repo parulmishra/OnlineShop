@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 29, 2017 at 01:48 AM
+-- Generation Time: Aug 30, 2017 at 06:22 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.0.15
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `online_shop_test`
 --
+CREATE DATABASE IF NOT EXISTS `online_shop_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `online_shop_test`;
 
 -- --------------------------------------------------------
 
@@ -29,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
   `buyer_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `street` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
@@ -45,7 +48,6 @@ CREATE TABLE `addresses` (
 CREATE TABLE `buyers` (
   `id` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
-  `shipping_address` text NOT NULL,
   `phone` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(10) NOT NULL,
@@ -112,6 +114,7 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `brand` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `price` double(11,2) NOT NULL,
   `description` text NOT NULL,
   `seller` varchar(255) NOT NULL,
@@ -172,37 +175,37 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `buyers`
 --
 ALTER TABLE `buyers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
 -- AUTO_INCREMENT for table `items_orders`
 --
 ALTER TABLE `items_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
