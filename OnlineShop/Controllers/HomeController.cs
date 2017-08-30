@@ -11,16 +11,25 @@ namespace OnlineShop.Controllers
     {
         return View();
     }
-    [HttpGet("/products/details")]
-    public ActionResult ProductDetails()
+    [HttpGet("/category/{id}")]
+    public ActionResult CategoryView(int id)
     {
-        return View();
+      Dictionary<string,object> Model = new Dictionary<string,object>();
+      Category newCategory = Category.Find(id);
+      Model["category"] = newCategory;
+      Model["products"] = newCategory.GetProducts();
+      return View("Category",Model);
     }
-    [HttpGet("/category")]
-    public ActionResult Category()
+    [HttpGet("/products/details/{id}")]
+    public ActionResult ProductDetails(int id)
     {
-        return View();
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      Product newProduct = Product.Find(id);
+      Model["product"] = newProduct;
+      Model["items"] = newProduct.GetItems();
+      return View(Model);
     }
+
     [HttpGet("/buyerform/add")]
     public ActionResult BuyerForm()
     {

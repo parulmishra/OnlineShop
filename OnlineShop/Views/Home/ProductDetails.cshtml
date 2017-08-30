@@ -1,22 +1,24 @@
 @{
   Layout = "_Layout";
 }
+@if(Model != null)
+{
 <div class="row">
   <div class="col-md-4">
-    <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="Los Angeles" style="width:100%;" id="productimg">
+    <img src="@Model.GetImage()" id="productimg">
   </div>
   <div class="col-md-5">
     <div class="row">
       <div class="page-header" >
-        <h1>[Brand] [Product Name]</h1>
+        <h1>@Model.GetName()</h1>
+        <h1>@Model.GetBrand()</h1>
       </div>
     </div>
-    <form action="/CART" method="post">
+    <form action="/cart" method="post">
       <div class="row">
-        <h3>Price: $20</h3>
+        <h3>Price: @Model.GetPrice()</h3>
       </div>
-      <div class="row">
-        <label>Size:</label>
+        <label>Size: @Model</label>
         <select class="size">
           <option value="small">Small</option>
           <option value="small">Medium</option>
