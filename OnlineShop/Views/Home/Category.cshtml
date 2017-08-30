@@ -4,9 +4,6 @@
 
 <div class="page-header" id="featured-header">
 
-  <h1>@Model["category"].GetName()</h1>
-</div>
-
 <div class="row sort-by">
   <label>Sort By:</label>
   <select class="sort">
@@ -21,9 +18,10 @@
 <!-- FOREACH loop to create product rows -->
 @if(Model != null )
 {
-  @foreach(var product in Model["products"])
+  <div class="row products">
+  @foreach(var product in Model["selectedCategory"].GetProducts())
   {
-    <div class="row products">
+
       <div class="column category-product">
         <a href="/products/details/@product.GetId()"><img src="@product.GetImage()"></a>
         <div class="brand-description">
@@ -32,6 +30,6 @@
           <a href="/products/details/@product.GetId()">@product.GetPrice()</a>
         </div>
       </div>
-      </div>
   }
+  </div>
 }

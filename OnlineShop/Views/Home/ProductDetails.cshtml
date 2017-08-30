@@ -5,28 +5,30 @@
 {
 <div class="row">
   <div class="col-md-4">
-    <img src="@Model.GetImage()" id="productimg">
+    <img src='@Model["product"].GetImage()' id="productimg">
   </div>
   <div class="col-md-5">
     <div class="row">
-      <div class="page-header" >
-        <h1>@Model.GetName()</h1>
-        <h1>@Model.GetBrand()</h1>
+      <div class="page-header">
+        <h1>@Model["product"].GetName()</h1>
+        <h1>@Model["product"].GetBrand()</h1>
       </div>
     </div>
+    </div>
+
     <form action="/cart" method="post">
       <div class="row">
-        <h3>Price: @Model.GetPrice()</h3>
+        <h3>Price: $100</h3>
       </div>
-        <label>Size: @Model</label>
+
+        <label>Size:</label>
         <select class="size">
           <option value="small">Small</option>
           <option value="small">Medium</option>
           <option value="small">Large</option>
         </select>
-      </div>
-      <div class="row colors">
 
+      <div class="row colors">
         <label>
           <input type="radio" name="colors" value="black">
           <div class="color color-1" value> </div>
@@ -53,20 +55,14 @@
           <div class="color color-6" value> </div>
         </label>
       </div>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <ul>
-                <li>[description]</li>
-                <li>[description]</li>
-                <li>[description]</li>
-                <li>[description]</li>
-              </ul>
     </div>
     <div class="col-md-3" id="cart">
       <label for="quantity">Quantity:</label>
       <input type="number" min="1" max="20" name="quantity">
       <button type="submit" class="btn btn-warning">Add to cart</button>
+    </div>
+    }
     </form>
 
-  </div>
+
 </div>

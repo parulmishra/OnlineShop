@@ -6,7 +6,7 @@ namespace OnlineShop.Controllers
 {
   public class HomeController : Controller
   {
-    [HttpPost("/populate")]
+    [HttpGet("/populate")]
     public ActionResult IndexPopulate()
     {
       Populate.PopulateDatabase();
@@ -17,16 +17,21 @@ namespace OnlineShop.Controllers
 
       Random rnd = new Random();
       List<Product> newFeatured = new List<Product>(){};
-      for(var i = 0; i < 4; i++)
+      if(featured.Count > 0)
       {
-        newFeatured.Add(featured[rnd.Next(0, (featured.Count - 1))]);
+        for(var i = 0; i < 4; i++)
+        {
+          newFeatured.Add(featured[rnd.Next(0, (featured.Count - 1))]);
+        }
+        var featuredProduct = featured[rnd.Next(0, (featured.Count - 1))];
+        model.Add("featured", featuredProduct);
       }
 
       model.Add("categories", Category.GetAll());
       model.Add("buyer", buyer);
       model.Add("products", newFeatured);
 
-      return View(model);
+      return View("Index",model);
     }
     [HttpGet("/")]
     public ActionResult Index()
@@ -54,22 +59,30 @@ namespace OnlineShop.Controllers
 
       return View(model);
     }
-    [HttpGet("/category/{id}")]
+    [HttpGet("/categories/{id}")]
     public ActionResult CategoryView(int id)
     {
       Dictionary<string,object> Model = new Dictionary<string,object>();
-      Category newCategory = Category.Find(id);
-      Model["category"] = newCategory;
-      Model["products"] = newCategory.GetProducts();
+      List<Category> allCategories = Category.GetAll();
+      List<Product> allProducts = Product.GetAll();
+      Buyer newBuyer = Buyer.Find(0);
+      Model.Add("categories", allCategories);
+      Model.Add("selectedCategory", Category.Find(id));
+      Model.Add("products",allProducts);
+      Model.Add("buyer",newBuyer);
       return View("Category",Model);
     }
     [HttpGet("/products/details/{id}")]
     public ActionResult ProductDetails(int id)
     {
       Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      Model.Add("categories", allCategories);
+      Buyer newBuyer = Buyer.Find(0);
+      Model.Add("buyer",newBuyer);
       Product newProduct = Product.Find(id);
-      Model["product"] = newProduct;
-      Model["items"] = newProduct.GetItems();
+      Model.Add("product",newProduct);
+      Model.Add("items",newProduct.GetItems());
       return View(Model);
     }
 
@@ -77,6 +90,26 @@ namespace OnlineShop.Controllers
     public ActionResult BuyerForm()
     {
         return View();
+    }
+    [HttpPost("/buyerform/add")]
+    public ActionResult BuyerFormAdd()
+    {
+      string name = Request.Form["buyer-name"];
+      string password = Request.Form["buyer-password"];
+      string phone = Request.Form["buyer-phone"];
+      string email = Request.Form["buyer-email"];
+      string cardNumber = Request.Form["buyer-card-number"];
+      string addressType = Request.Form["buyer-address-type"];
+      string street = Request.Form["buyer-address-street"];
+      string city = Request.Form["buyer-address-city"];
+      string state = Request.Form["buyer-address-state"];
+      string country = Request.Form["buyer-address-country"];
+      string zip = Request.Form["buyer-address-zip"];
+      Buyer newBuyer = new Buyer(name,phone,email,password,cardNumber,0);
+      newBuyer.Save();
+      Address newAddress = new Address(newBuyer.GetId(),addressType,street,city,state,country,zip,0);
+      newAddress.Save();
+      return View("BuyerDetail");
     }
     [HttpGet("/cart")]
     public ActionResult Cart()
