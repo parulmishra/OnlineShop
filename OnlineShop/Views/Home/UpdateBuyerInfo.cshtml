@@ -1,0 +1,39 @@
+@{
+  Layout = "_Layout";
+}
+<div class="row">
+ <div class="well">
+<h2>Update Details</h2>
+<form action='/buyers/update/@Model["buyer"].GetId()' method="post">
+  <div class="container">
+    <label for ="buyer">Name:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" name="buyer-name" value='@Model["buyer"].GetUsername()'>
+    </div>
+
+    <label for ="buyer">Change Password:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" name="buyer-password" value="">
+    </div>
+
+    <label for ="buyer">Confirm Password:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" name="confirm-password" value="">
+    </div>
+
+    <label for ="buyer">Phone:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" name="buyer-phone" value='@Model["buyer"].GetPhone()'>
+    </div>
+    <label for ="buyer">Email:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" name="buyer-email" value='@Model["buyer"].GetEmail()'>
+    </div>
+    <label for ="buyer">Card Number:</label>
+    <div class="form-group">
+      <input type="text" class="form-control" name="buyer-card-number" value='@Model["buyer"].GetCreditCard()'>
+    </div>
+
+  <button type="submit" class="btn btn-info" name="button">Update</button>
+  </div>
+  </form>

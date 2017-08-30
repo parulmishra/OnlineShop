@@ -89,11 +89,17 @@ namespace OnlineShop.Controllers
     [HttpGet("/buyerform/add")]
     public ActionResult BuyerForm()
     {
-        return View();
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      Model.Add("categories",allCategories);
+      return View(Model);
     }
-    [HttpPost("/buyerform/add")]
+    [HttpPost("/buyerdetails")]
     public ActionResult BuyerFormAdd()
     {
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      List<Address> addresses = new List<Address>();
       string name = Request.Form["buyer-name"];
       string password = Request.Form["buyer-password"];
       string phone = Request.Form["buyer-phone"];
@@ -109,8 +115,41 @@ namespace OnlineShop.Controllers
       newBuyer.Save();
       Address newAddress = new Address(newBuyer.GetId(),addressType,street,city,state,country,zip,0);
       newAddress.Save();
-      return View("BuyerDetail");
+      addresses.Add(newAddress);
+      Model.Add("addresses",addresses);
+      Model.Add("buyer",newBuyer);
+      Model.Add("categories",allCategories);
+      return View("BuyerDetail",Model);
     }
+    [HttpGet("/buyers/update/{id}")]
+	  public ActionResult UpdateBuyerInfoForm(int id)
+	  {
+      Dictionary<string,object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      List<Product> allProducts = Product.GetAll();
+      Buyer newBuyer = Buyer.Find(1);
+      List<Order> OrdersForThisBuyer = newBuyer.GetOrderHistory();
+      Model.Add("categories", allCategories);
+      Model.Add("buyer",newBuyer);
+      Model.Add("products",allProducts);
+      Model.Add("orders",OrdersForThisBuyer);
+      return View("UpdateBuyerInfo",Model);
+	  }
+    [HttpPost("/buyers/update/{id}")]
+	  public ActionResult UpdateBuyerInfo(int id)
+	  {
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      Buyer newBuyer = Buyer.Find(0);
+      string name = Request.Form["buyer-name"];
+      string password = Request.Form["buyer-password"];
+      string phone = Request.Form["buyer-phone"];
+      string email = Request.Form["buyer-email"];
+      string cardNumber = Request.Form["buyer-card-number"];
+      Model.Add("categories", allCategories);
+      Model.Add("buyer",newBuyer);
+      return View("BuyerDetail",Model);
+	  }
     [HttpGet("/cart")]
     public ActionResult Cart()
     {
@@ -123,11 +162,6 @@ namespace OnlineShop.Controllers
     }
     [HttpGet("/login")]
     public ActionResult LogIn()
-    {
-        return View();
-    }
-    [HttpGet("/detail")]
-    public ActionResult BuyerDetail()
     {
         return View();
     }
