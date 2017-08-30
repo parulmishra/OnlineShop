@@ -60,7 +60,7 @@ namespace OnlineShop.Models
 
       Product pantsOne = new Product(pants.GetId(),"Levi's","Jeans",65.00,"Expensive jeans","Banana Republic","http://m.footaction.com/images/products/zoom/50102261_z.jpg");
       pantsOne.Save();
-      Product pantsTwo = new Product(pants.GetId(),"American Eagle","Khakis",39.99,"These pants have wings!","Macy's","http://www.pngmart.com/files/3/Polo-Shirt-PNG-Image.png");
+      Product pantsTwo = new Product(pants.GetId(),"American Eagle","Khakis",39.99,"These pants have wings!","Macy's","https://cdn.shopify.com/s/files/1/0305/5853/products/5615-O5_SU_64bd400f-b8e7-4a20-85fd-7c4bf3438a5a.png?v=1479407450");
       pantsTwo.Save();
       Product pantsThree = new Product(pants.GetId(),"Sleazy's Slacks","Slacks",19.99,"The starter pair","Men's Warehouse","https://cdn.shopify.com/s/files/1/0305/5853/products/0990-17_wi_cttn_poly_dress_khaki-pl-nvy.png?v=1488473457");
       pantsThree.Save();
