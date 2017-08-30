@@ -381,6 +381,106 @@ namespace OnlineShop.Models
       return buyerAddresses;
     }
 
+    public void Update(string newUsername, string newPhone, string newEmail, string newPassword, string newCreditCard)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE buyers SET user_name = @newUsername, password = @newPassword, phone = @newPhone,email = @newEmail, credit_card = @newCreditCard WHERE id = @thisId;";
+
+      MySqlParameter usernameParameter = new MySqlParameter();
+      usernameParameter.ParameterName = "@newUsername";
+      usernameParameter.Value = newUsername;
+      cmd.Parameters.Add(usernameParameter);
+
+      MySqlParameter phoneParameter = new MySqlParameter();
+      phoneParameter.ParameterName = "@newPhone";
+      phoneParameter.Value = newPhone;
+      cmd.Parameters.Add(phoneParameter);
+
+      MySqlParameter emailParameter = new MySqlParameter();
+      emailParameter.ParameterName = "@newEmail";
+      emailParameter.Value = newEmail;
+      cmd.Parameters.Add(emailParameter);
+
+      MySqlParameter passwordParameter = new MySqlParameter();
+      passwordParameter.ParameterName = "@newPassword";
+      passwordParameter.Value = newPassword;
+      cmd.Parameters.Add(passwordParameter);
+
+      MySqlParameter creditCardParameter = new MySqlParameter();
+      creditCardParameter.ParameterName = "@newCreditCard";
+      creditCardParameter.Value = newCreditCard;
+      cmd.Parameters.Add(creditCardParameter);
+
+      MySqlParameter buyerIdParameter = new MySqlParameter();
+      buyerIdParameter.ParameterName = "@thisId";
+      buyerIdParameter.Value = _id;
+      cmd.Parameters.Add(buyerIdParameter);
+
+      _username = newUsername;
+      _phone = newPhone;
+      _email = newEmail;
+      _password = newPassword;
+      _creditCard = newCreditCard;
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+
+    }
+
+    public static Buyer TryLogin(string username, string password)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM buyers WHERE user_name = @username AND password = @password;";
+
+      MySqlParameter usernameParameter = new MySqlParameter();
+      usernameParameter.ParameterName = "@username";
+      usernameParameter.Value = username;
+      cmd.Parameters.Add(usernameParameter);
+
+      MySqlParameter passwordParameter = new MySqlParameter();
+      passwordParameter.ParameterName = "@password";
+      passwordParameter.Value = password;
+      cmd.Parameters.Add(passwordParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      int readId = 0;
+      string readUsername = "";
+      string phone = "";
+      string email = "";
+      string readPassword = "";
+      string creditCard = "";
+
+      while(rdr.Read())
+      {
+        readId = rdr.GetInt32(0);
+        readUsername = rdr.GetString(1);
+        phone = rdr.GetString(2);
+        email = rdr.GetString(3);
+        readPassword = rdr.GetString(4);
+        creditCard = rdr.GetString(5);
+      }
+
+      conn.Close();
+
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+      Buyer foundBuyer = new Buyer(readUsername, phone, email, readPassword, creditCard, readId);
+      return foundBuyer;
+    }
+
     public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();

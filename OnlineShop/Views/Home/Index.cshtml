@@ -4,6 +4,10 @@
 <div class="page-header" id="featured-header">
   <h1>Featured</h1>
 </div>
+<form class="" action="/populate" method="post">
+  <button type="submit" name="button">POPULATE DATABASE</button>
+</form>
+
 
 <div class="container">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -12,68 +16,48 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item featured-carousel active">
+        <a href='/products/@Model["featured"].GetId()'>
         <div class="row">
           <div class="col-md-6 carousel-image">
-            <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="Los Angeles" style="width:100%;">
+            <img src='@Model["featured"].GetImage()' alt='@Model["featured"].GetName()' style="width:100%;">
           </div>
           <div class="col-md-6 carousel-description">
-            <h3>[Brand] shirt</h3>
-            <ul>
-              <h4>Comes in</h4>
-              <li>[Color1]</li>
-              <li>[Color2]</li>
-              <li>[Color3]</li>
-            </ul>
-            <ul>
-              <h4>Sizes</h4>
-              <li>[Color1]</li>
-              <li>[Color2]</li>
-              <li>[Color3]</li>
-            </ul>
-            <h2>Only [Price]!</h2>
+            <h3>@Model["featured"].GetBrand()</h3>
+            <h3>@Model["featured"].GetName()</h3>
+            <h2>@Model["featured"].GetPrice()</h2>
           </div>
         </div>
-
-        <div class="carousel-caption">
-          <a href="#"><h3>View Product Details</h3></a>
-        </div>
+          </a>
       </div>
 
-      <div class="item featured-carousel">
-
-        <div class="row">
-          <div class="col-md-6 carousel-image">
-            <img src="http://pngimg.com/uploads/socks/socks_PNG8264.png?i=1" alt="Los Angeles" style="width:100%;">
+      @foreach (var product in @Model["products"])
+      {
+          <div class="item featured-carousel">
+            <a href="/products/@product.GetId()">
+            <div class="row">
+              <div class="col-md-6 carousel-image">
+                <img src="@product.GetImage()" alt="@product.GetName()" style="width:100%;">
+              </div>
+              <div class="col-md-6 carousel-description">
+                <h3>@product.GetBrand()</h3>
+                <h3>@product.GetName()</h3>
+                <h2>@product.GetPrice()</h2>
+              </div>
+            </div>
+              </a>
           </div>
-          <div class="col-md-6 carousel-description">
-            <h3>[Brand] socks</h3>
-            <ul>
-              <h4>Comes in</h4>
-              <li>[Color1]</li>
-              <li>[Color2]</li>
-              <li>[Color3]</li>
-            </ul>
-            <ul>
-              <h4>Sizes</h4>
-              <li>[Color1]</li>
-              <li>[Color2]</li>
-              <li>[Color3]</li>
-            </ul>
-            <h2>Only [Price]!</h2>
-          </div>
-        </div>
+      }
 
-        <div class="carousel-caption">
-          <a href="#"><h3>View Product Details</h3></a>
-        </div>
-      </div>
 
-      <div class="item featured-carousel ">
+      @* <div class="item featured-carousel ">
 
         <div class="row">
           <div class="col-md-6 carousel-image">
@@ -100,7 +84,7 @@
         <div class="carousel-caption">
           <a href="#"><h3>View Product Details</h3></a>
         </div>
-      </div>
+      </div> *@
 
     </div>
 
