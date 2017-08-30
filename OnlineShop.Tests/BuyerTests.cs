@@ -142,6 +142,31 @@ namespace OnlineShop.Tests
 
       CollectionAssert.AreEqual(expected,actual);
     }
+    [TestMethod]
+    public void TryLogin_TriesToLogin_Buyer()
+    {
+      Buyer newBuyer = new Buyer("username", "phone", "email", "password", "creditCard");
+      newBuyer.Save();
+
+      Buyer expected = newBuyer;
+      Buyer actual = Buyer.TryLogin("username", "password");
+
+      Assert.AreEqual(expected,actual);
+    }
+
+    [TestMethod]
+    public void Update_UpdateProperties_Buyer()
+    {
+      Buyer newBuyer = new Buyer("username", "phone", "email", "password", "creditCard");
+      newBuyer.Save();
+
+      newBuyer.Update("username2","phone2","email2","password2","2222-222-222");
+
+      Buyer expected = newBuyer;
+      Buyer actual = Buyer.Find(newBuyer.GetId());
+
+      Assert.AreEqual(expected,actual);
+    }
 
     public void Dispose()
     {
