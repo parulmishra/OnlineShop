@@ -110,6 +110,8 @@ namespace OnlineShop.Models
       orderId.Value = _id;
       cmd.Parameters.Add(orderId);
 
+
+
       MySqlParameter itemIdParameter = new MySqlParameter();
       itemIdParameter.ParameterName = "@itemId";
       itemIdParameter.Value = itemId;

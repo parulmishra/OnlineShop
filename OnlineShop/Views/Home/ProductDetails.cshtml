@@ -16,13 +16,13 @@
     </div>
     </div>
 
-    <form action="/cart" method="post">
+    <form action='/cart/@Model["product"].GetId()/@Model["buyer"].GetId()' method="post">
       <div class="row">
-        <h3>Price: $100</h3>
+        <h3>Price: $@Model["product"].GetPrice()</h3>
       </div>
 
         <label>Size:</label>
-        <select class="size">
+        <select class="size" name="size-select">
           <option value="small">Small</option>
           <option value="small">Medium</option>
           <option value="small">Large</option>
@@ -30,35 +30,35 @@
 
       <div class="row colors">
         <label>
-          <input type="radio" name="colors" value="black">
+          <input type="radio" name="colors" value="black" checked>
           <div class="color color-1" value> </div>
         </label>
 
         <label>
-          <input type="radio" name="colors" value="black">
+          <input type="radio" name="colors" value="white">
           <div class="color color-2" value> </div>
         </label>
         <label>
-          <input type="radio" name="colors" value="black">
+          <input type="radio" name="colors" value="blue">
           <div class="color color-3" value> </div>
         </label>
         <label>
-          <input type="radio" name="colors" value="black">
+          <input type="radio" name="colors" value="green">
           <div class="color color-4" value> </div>
         </label>
         <label>
-          <input type="radio" name="colors" value="black">
+          <input type="radio" name="colors" value="red">
           <div class="color color-5" value> </div>
         </label>
         <label>
-          <input type="radio" name="colors" value="black">
+          <input type="radio" name="colors" value="beige">
           <div class="color color-6" value> </div>
         </label>
       </div>
     </div>
     <div class="col-md-3" id="cart">
       <label for="quantity">Quantity:</label>
-      <input type="number" min="1" max="20" name="quantity">
+      <input type="number" min="1" max="20" name="quantity" required>
       <button type="submit" class="btn btn-warning">Add to cart</button>
     </div>
     }
