@@ -28,9 +28,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Pants</a></li>
-            <li><a href="#">Shirts</a></li>
-            <li><a href="#">Socks</a></li>
+            @foreach(var category in Model["categories"])
+            {
+                <li><a href="/categories/@category.GetId()">@category.GetName()</a></li>
+            }
           </ul>
         </li>
       </ul>
