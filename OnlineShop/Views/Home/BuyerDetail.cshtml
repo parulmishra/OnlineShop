@@ -29,53 +29,20 @@
         </div>
       }
       </div>
-
-
-
-      @* <div class="product-history">
-        <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-        <p>Item1</p>
-        <p>Price</p>
-        <p>Purchase Date:</p>
-      </div>
-
-      <div class="product-history">
-        <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-        <p>Item1</p>
-        <p>Price</p>
-        <p>Purchase Date:</p>
-      </div>
-
-      <div class="product-history">
-        <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-        <p>Item1</p>
-        <p>Price</p>
-        <p>Purchase Date:</p>
-      </div>
-
-      <div class="product-history">
-        <img src="http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png" alt="tshirt">
-        <p>Item1</p>
-        <p>Price</p>
-        <p>Purchase Date:</p>
-      </div> *@
-
-
-    <!-- Edit Info Area -->
-@if(Model != null)
-{
-    <div class="col-md-4">
-      <div class="well">
-        <p span class="info-category">Name : @Model["buyer"].GetUsername()</p>
-        <p span class="info-category">Emails :  @Model["buyer"].GetEmail()</p><br>
-        <p class="info-category">Address : @Model["addresses"][0].GetName()</p>
-        <p class="info-category">Street : @Model["addresses"][0].GetStreet()</p>
-        <p class="info-category">City : @Model["addresses"][0].GetCity()</p>
-        <p class="info-category">State : @Model["addresses"][0].GetState()</p>
-        <p class="info-category">Zip : @Model["addresses"][0].GetZip()</p>
-        <p class="info-category">Country : @Model["addresses"][0].GetCountry()</p>
-      </div>
+      @if(Model != null)
+      {
+        <div class="col-md-4">
+          <div class="well">
+            <p span class="info-category">Name : @Model["buyer"].GetUsername()</p>
+            <p span class="info-category">Emails :  @Model["buyer"].GetEmail()</p><br>
+            <p class="info-category">Address : @Model["addresses"][0].GetName()</p>
+            <p class="info-category">Street : @Model["addresses"][0].GetStreet()</p>
+            <p class="info-category">City : @Model["addresses"][0].GetCity()</p>
+            <p class="info-category">State : @Model["addresses"][0].GetState()</p>
+            <p class="info-category">Zip : @Model["addresses"][0].GetZip()</p>
+            <p class="info-category">Country : @Model["addresses"][0].GetCountry()</p>
+          </div>
+        </div>
+      }
     </div>
-  }
-  </div>
 </div>
