@@ -21,7 +21,7 @@
             <div class= "row">
               <img src="@item.GetProductInfo().GetImage()" alt="tshirt">
               <p>Name : @item.GetProductInfo().GetName()</p>
-              <p>Price : @item.GetProductInfo().GetPrice()</p>
+              <p>Price : @item.GetProductInfo().GetPrice().ToString("0.00")</p>
               <p>Purchased Date : @order.GetCheckoutDate()</p>
             </div>
           }

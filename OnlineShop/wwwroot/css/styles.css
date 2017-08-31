@@ -164,6 +164,11 @@ label > input + div{ /* IMAGE STYLES */
 label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   border: 3px solid black;
 }
+
+.images {
+  text-align: center;
+}
+
 #productimg{
   padding: 10px;
   margin-top: 50px;
@@ -275,21 +280,21 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 /* Buy page */
 
+.main-order {
+  margin: 20px;
+}
+
 .buy-options
 {
-  margin-top: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+
 }
 .order_details
 {
-  margin-top: 30px;
-  height: 400px;
+  text-align: center;
 }
 .bill_details
 {
-  margin-top: 30px;
-  height: 400px;
+
 }
 
 /* Buyer Detail Page */

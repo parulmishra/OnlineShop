@@ -16,7 +16,7 @@
         <div class="brand-description">
           <a href="/products/details/@product.GetId()">@product.GetBrand()</a><br>
           <a href="/products/details/@product.GetId()">@product.GetDescription()</a><br>
-          <a href="/products/details/@product.GetId()">@product.GetPrice()</a>
+          <a href="/products/details/@product.GetId()">@product.GetPrice().ToString("0.00")</a>
         </div>
       </div>
   }

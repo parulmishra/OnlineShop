@@ -19,7 +19,7 @@ namespace OnlineShop.Models
       shirtsOne.Save();
       Product shirtsTwo = new Product(shirts.GetId(),"GAP","Button up",55.99,"Work work","GAP","https://cdn.shopify.com/s/files/1/0169/5130/products/tradlands_stow_lake_featured_button_up_shirts_for_women_grande.png?v=1499358188");
       shirtsTwo.Save();
-      Product shirtsThree = new Product(shirts.GetId(),"Scott Vintage","T-shirt",10.99,"Vintage","Nordstrom","http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png");
+      Product shirtsThree = new Product(shirts.GetId(),"Scott Vintage","T-shirt",10.00,"Vintage","Nordstrom","http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png");
       shirtsThree.Save();
 
 
