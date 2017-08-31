@@ -1,5 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: #f9fbff;
 }
 
 #featured-header{
@@ -27,6 +28,10 @@ body {
 .navbar{
   background-color: #f6f4f9;
   margin-bottom: 0px;
+
+}
+.navbar img{
+  height: 50px;
 }
 .navbar-brand{
   font-size: 2em;
@@ -46,14 +51,33 @@ body {
   margin: 10px;
 }
 #myCarousel{
-  background-color: #fff;
+  background-color: #f9fbff;
   width:100%;
 }
 .featured-carousel img{
- height: auto;
- max-width: 500px;
+ height: 600px;
+ width:auto;
  padding: 50px;
 }
+
+.indexHeader{
+  background-image: url("https://urbanmatter.com/chicago/wp-content/uploads/2015/04/Girls-Shopping.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 0px;
+
+}
+.indexHeader h1{
+    margin-top: 0px;
+  font-size:  5em;
+  padding-top: 250px;
+  color: white;
+      text-shadow: 4px 4px black;
+}
+
 .carousel-indicators li {
   background-color: #999;
   background-color: rgba(70,70,70,.25);
