@@ -22,7 +22,7 @@
                 <p>@item.GetProductInfo().GetName()</p>
               </div>
               <div class="col-md-3">
-                <p>Price: $@item.GetProductInfo().GetPrice()</p>
+                <p>Price: $@item.GetProductInfo().GetPrice().ToString("0.00")</p>
               </div>
             </div>
           </div>
@@ -79,11 +79,11 @@
         <div class="container">
           <h4>Bill Details</h4>
           <h5>Total Items: @Model["order"].GetItems().Count</h5>
-          <h5>Total Items Cost: $@Model["order"].GetSubtotal()</h5>
-          <h5 id="shipping_cost">Shipping Cost: $@((int)@Model["order"].GetSubtotal()/15)</h5>
-          <h5>Tax:$@((int)@Model["order"].GetSubtotal()/10)</h5>
+          <h5>Total Items Cost: $@Model["order"].GetSubtotal().ToString("0.00")</h5>
+          <h5 id="shipping_cost">Shipping Cost: $@Model["order"].GetShipping().ToString("0.00")</h5>
+          <h5>Tax:$@Model["order"].GetTax().ToString("0.00")</h5>
 
-          <h5>Grand Total: $@Model["order"].GetGrandTotal()</h2>
+          <h5>Grand Total: $@Model["order"].GetGrandTotal().ToString("0.00")</h2>
 
 
           <button type="submit" class="btn btn-success">Place Order</button>
