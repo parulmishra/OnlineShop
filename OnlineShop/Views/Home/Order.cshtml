@@ -85,12 +85,14 @@
               <h5>Total Items:</h5>
               <h5>Total Items Cost:</h5>
               <h5 id="shipping_cost">Shipping Cost:</h5>
+              <h5>Tax:
               <h5>Grand Total:</h5>
             </div>
             <div class="col-md-4">
               <h5>@Model["order"].GetItems().Count</h5>
               <h5>$@Model["order"].GetSubtotal().ToString("0.00")</h5>
               <h5>$@Model["order"].GetShipping().ToString("0.00")</h5>
+              <h5>$@Model["order"].GetTax().ToString("0.00")</h5>
               <h5>$@Model["order"].GetGrandTotal().ToString("0.00")</h5>
               <button type="submit" class="btn btn-success">Place Order</button>
             </div>
