@@ -366,6 +366,7 @@ namespace OnlineShop.Controllers
       model.Add("categories", Category.GetAll());
       model.Add("buyer", selectedBuyer);
       model.Add("items", selectedBuyer.GetCurrentOrder().GetItems());
+      model.Add("order", myOrder);
 
       return View("Cart", model);
     }
