@@ -12,17 +12,6 @@
 
     </div>
 
-    <form action='/products/@Model["buyer"].GetId()/search' autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
-      <div class="input-group">
-          <input name="searchtext" class="form-control" type="text" placeholder="Enter search here" required>
-          <span class="input-group-btn">
-             <button class="btn btn-default" type="submit" id="addressSearch">
-                 <span class="icon-search">Search</span>
-             </button>
-          </span>
-      </div>
-  </form>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -39,11 +28,11 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href='/cart/@Model["buyer"].GetId()'>Cart</a></li>
+        <li><a href='/cart/@Model["buyer"].GetId()'><span class="cart-span"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</span></a></li>
         @if(Model["buyer"].GetId()!=0)
         {
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Model["buyer"].GetUsername() <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="cart-span"><span class="glyphicon glyphicon-user"></span> @Model["buyer"].GetUsername() </span><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href='/buyerdetail/@Model["buyer"].GetId()'>Order History</a></li>
               <li><a href="/updateBuyerInfo/@Model["buyer"].GetId()">Edit profile</a></li>
@@ -52,10 +41,23 @@
           </li>
         }
         else{
-          <li><a href="/login">Log in</a></li>
+          <li><a href="/login"><span class="cart-span"><span class="glyphicon glyphicon-user"></span> Log in</span></a></li>
         }
 
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div class="row search-row">
+  <form action='/products/@Model["buyer"].GetId()/search' class="search-bar" autocomplete="off" method="post" accept-charset="utf-8">
+    <div class="input-group">
+        <input name="searchtext" class="form-control" type="text" placeholder="Enter search here" required>
+        <span class="input-group-btn">
+           <button class="btn btn-default" type="submit" id="addressSearch">
+               <span class="icon-search">Search</span>
+           </button>
+        </span>
+    </div>
+  </form>
+</div>

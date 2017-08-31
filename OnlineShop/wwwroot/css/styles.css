@@ -18,6 +18,25 @@ body {
     letter-spacing: 5px;
 }
 
+.glyphicon-shopping-cart, .glyphicon-user {
+  font-size: 0.8em;
+  color: #B3B0AC !important;
+}
+
+.cart-span:hover span {
+  color: black !important;
+}
+
+.search-row {
+  background-color: #f1f1f1;
+  padding-bottom: 15px;
+}
+
+.search-bar {
+  width:50%;
+  margin:auto;
+}
+
 .footer{
   background-color: #e0cab3;
   padding: 2em;
@@ -28,25 +47,25 @@ body {
 
 .nav
 {
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 0px;
   padding: 10px;
 }
 .navbar{
   background-color: #f1f1f1;
   margin-bottom: 0px;
-
-padding: 30px;
-
+  border:none;
+  margin-top: -5px;
 }
 .navbar img{
   height: 50px;
 }
 .navbar-brand{
-  padding-top:35px;
+  padding-top:30px;
   font-size: 2em;
   margin: 10px;
   letter-spacing: 3px;
+  border-bottom: 1
 
 }
 
@@ -239,8 +258,8 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   display: block;
   max-height: 150px;
   max-width: 150px;
-  width:50%;
-  height:50%;
+  width:auto;
+  height:auto;
   margin:auto;
 }
 .column {
@@ -250,8 +269,8 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   width:28%;
   margin: 10px 20px;
   padding: 15px 0;
-  min-height: 250px;
-  min-width: 250px;
+  height: 300px;
+  width: 400px;
 }
 .brand-description {
   display:inline-block;
