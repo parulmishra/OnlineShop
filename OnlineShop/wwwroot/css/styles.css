@@ -235,6 +235,10 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 #cart label, input{
   font-size: 1.3em;
 }
+.sort-by{
+  font-size: 1.3em;
+  text-align: center;
+}
 
 .cart-well {
   text-align: center;
@@ -414,4 +418,9 @@ font-size: 4em;
 
 .home-button {
   margin-bottom: 15px;
+}
+
+#class-info
+{
+  float: right;
 }
