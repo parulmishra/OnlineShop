@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="page-header" id="featured-header">
+
+<!-- FOREACH loop to create product rows -->
+@if(Model != null )
+{
+  <div class="row products">
+  @foreach(var product in Model["searchResults"])
+  {
+
+      <div class="column category-product">
+        <a href='/products/details/@product.GetId()/@Model["buyer"].GetId()'><img src="@product.GetImage()"></a>
+        <div class="brand-description">
+          <a href="/products/details/@product.GetId()">@product.GetBrand()</a><br>
+          <a href="/products/details/@product.GetId()">@product.GetDescription()</a><br>
+          <a href="/products/details/@product.GetId()">@product.GetPrice()</a>
+        </div>
+      </div>
+  }
+  </div>
+}

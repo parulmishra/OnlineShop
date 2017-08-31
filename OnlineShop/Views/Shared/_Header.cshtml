@@ -11,9 +11,9 @@
       <a class="navbar-brand" href='/@Model["buyer"].GetId()'>Online Shop</a>
     </div>
 
-    <form action="" autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
+    <form action='/products/@Model["buyer"].GetId()/search' autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
       <div class="input-group">
-          <input name="searchtext" value="" class="form-control" type="text" placeholder="Enter search here">
+          <input name="searchtext" class="form-control" type="text" placeholder="Enter search here" required>
           <span class="input-group-btn">
              <button class="btn btn-default" type="submit" id="addressSearch">
                  <span class="icon-search">Search</span>
@@ -47,6 +47,7 @@
             <ul class="dropdown-menu">
               <li><a href='/buyerdetail/@Model["buyer"].GetId()'>Order History</a></li>
               <li><a href="/updateBuyerInfo/@Model["buyer"].GetId()">Edit profile</a></li>
+              <li><a href="/0">Log out</a></li>
             </ul>
           </li>
         }

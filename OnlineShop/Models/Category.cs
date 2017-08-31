@@ -165,19 +165,19 @@ namespace OnlineShop.Models
 
       if (sortParameter == "priceHighToLow")
       {
-        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY price DESC;";
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId ORDER BY price DESC;";
       }
       else if (sortParameter =="priceLowToHigh")
       {
-        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY price ASC;";
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId ORDER BY price ASC;";
       }
       else if (sortParameter =="brandAlphabetical")
       {
-        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY brand DESC;";
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId ORDER BY brand ASC;";
       }
       else if (sortParameter =="brandAlphabeticalReverse")
       {
-        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId SORT BY brand ASC;";
+        cmd.CommandText = @"SELECT * FROM products WHERE category_id=@categoryId ORDER BY brand DESC;";
       }
       else
       {

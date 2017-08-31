@@ -11,20 +11,22 @@
 
 <div class="row sort-by">
   <label>Sort By:</label>
-  <select class="sort">
-    <option>Price - High to Low</option>
-    <option>Price - Low to High</option>
-    <option>Brand - A-Z</option>
-    <option>Brand - Z-A</option>
-
+  <form class="" action='/categories/@Model["selectedCategory"].GetId()/@Model["buyer"].GetId()' method="post">
+  <select class="sort" name="sort">
+    <option value="priceHighToLow">Price - High to Low</option>
+    <option value="priceLowToHigh">Price - Low to High</option>
+    <option value="brandAlphabetical">Brand - A-Z</option>
+    <option value="brandAlphabeticalReverse">Brand - Z-A</option>
   </select>
+  <button type="submit" name="button" class="btn btn-warning">Sort</button>
+  </form>
 </div>
 
 <!-- FOREACH loop to create product rows -->
 @if(Model != null )
 {
   <div class="row products">
-  @foreach(var product in Model["selectedCategory"].GetProducts())
+  @foreach(var product in Model["selectedCategory"].GetProducts(Model["sortParameter"]))
   {
 
       <div class="column category-product">

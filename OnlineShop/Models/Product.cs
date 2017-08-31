@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using System.Linq;
 
 namespace OnlineShop.Models
 {
@@ -268,16 +269,18 @@ namespace OnlineShop.Models
     public static List<Product> Search(string searchParameter)
     {
       List<Product> foundProducts = new List<Product>{};
-      string searchTerm = searchParameter.ToLower()[0].ToString();
-      string wildCard = searchTerm + "%";
+      List<Product> categoryProducts = new List<Product>{};
+      List<Category> foundCategories = new List<Category>{};
+
       MySqlConnection conn = DB.Connection();
       conn.Open();
+
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM products WHERE brand LIKE @wildCard OR name LIKE @wildCard;";
+      cmd.CommandText = @"SELECT * FROM products WHERE brand LIKE CONCAT('%', @searchParameter, '%') OR name LIKE CONCAT('%', @searchParameter, '%'); ";
 
       MySqlParameter searchTermParameter = new MySqlParameter();
-      searchTermParameter.ParameterName = "@wildCard";
-      searchTermParameter.Value = wildCard;
+      searchTermParameter.ParameterName = "@searchParameter";
+      searchTermParameter.Value = searchParameter;
       cmd.Parameters.Add(searchTermParameter);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
@@ -295,12 +298,48 @@ namespace OnlineShop.Models
         Product newProduct = new Product(categoryId,productBrand,name,price,description,seller,image,productId);
         foundProducts.Add(newProduct);
       }
+
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return foundProducts;
+
+      MySqlConnection conn2 = DB.Connection();
+      conn2.Open();
+
+      var cmd2 = conn2.CreateCommand() as MySqlCommand;
+      cmd2.CommandText = @"SELECT * FROM categories WHERE name LIKE CONCAT('%', @searchParameter, '%');";
+
+      searchTermParameter.ParameterName = "@searchParameter";
+      searchTermParameter.Value = searchParameter;
+      cmd2.Parameters.Add(searchTermParameter);
+
+      var rdr2 = cmd2.ExecuteReader() as MySqlDataReader;
+      while(rdr2.Read())
+      {
+        int id = rdr2.GetInt32(0);
+        string name = rdr2.GetString(1);
+        Category newCategory = new Category(name, id);
+        foundCategories.Add(newCategory);
+      }
+      foreach(var category in foundCategories)
+      {
+
+        foreach(var product in category.GetProducts())
+        {
+          categoryProducts.Add(product);
+        }
+      }
+
+      List<Product> duplicatesRemoved = foundProducts.Union(categoryProducts).ToList();
+
+      conn2.Close();
+      if (conn2 != null)
+      {
+        conn2.Dispose();
+      }
+      return duplicatesRemoved;
     }
     public List<Item> GetItems()
     {
