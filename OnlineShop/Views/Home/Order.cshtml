@@ -6,19 +6,22 @@
 
     <div class="col-md-5">
       <div class="well order_details">
-        <h4>Order Details</h4>
+        <h3>Order Details</h3>
 
         @foreach (var item in @Model["items"])
         {
-          <div class ="product">
+          <div class ="product-order">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <p>@item.GetProductInfo().GetBrand()</p>
+              </div>
+              <div class="col-md-3">
                 <p>@item.GetProductInfo().GetName()</p>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <p>Price: $@item.GetProductInfo().GetPrice()</p>
               </div>
             </div>

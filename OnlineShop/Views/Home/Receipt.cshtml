@@ -2,39 +2,43 @@
   Layout = "_Layout";
 }
 
-<div class="container">
+<div class="container receipt-container">
   <div class="row">
-    <div class="receipt-container">
-      <h2>Order Placed!</h2>
-      <h4>@Model["order"].GetCheckoutDate()
-      @foreach (var item in @Model["order"].GetItems())
-      {
-        <div class ="product">
+    <h2>Order Placed!</h2>
+    <h4>@Model["order"].GetCheckoutDate()
+  </div>
+  <div class="row">
+  @foreach (var item in @Model["order"].GetItems())
+  {
+    <div class ="product">
 
-          <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
-          <p>@item.GetColor() @item.GetProductInfo().GetName()</p>
-          <p>@item.GetSize() </p>
-          <p>@item.GetProductInfo().GetBrand()</p>
-          <p>Price: $@item.GetProductInfo().GetPrice().ToString("0.00")</p>
-            </div>
-      }
+      <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
+      <p>@item.GetColor() @item.GetProductInfo().GetName()</p>
+      <p>@item.GetSize() </p>
+      <p>@item.GetProductInfo().GetBrand()</p>
+      <p>Price: $@item.GetProductInfo().GetPrice().ToString("0.00")</p>
+    </div>
+  }
+  </div>
 
+  <div class="row">
+    <div class="col-md-6">
       <h3>Shipping Address</h3>
       <h4>@Model["address"].GetName()</h4>
       <p>@Model["address"].GetStreet()</p>
-      <p>@Model["address"].GetCity()</p>
-      <p>@Model["address"].GetState()</p>
-      <p>@Model["address"].GetZip()</p>
+      <p>@Model["address"].GetCity() @Model["address"].GetState() @Model["address"].GetZip()</p>
       <p>@Model["address"].GetCountry()</p>
+    </div>
 
-
+    <div class="col-md-6">
       <h4>Bill Details</h4>
       <h5>Total Items: @Model["order"].GetItems().Count</h5>
       <h5>Total Items Cost: $@Model["order"].GetSubtotal()</h5>
       <h5 id="shipping_cost">Shipping Cost: $@((int)@Model["order"].GetSubtotal()/15)</h5>
       <h5>Tax:$@((int)@Model["order"].GetSubtotal()/10)</h5>
 
-      <a href='/@Model["buyer"].GetId()' class="btn btn-default">Back Home</a>
     </div>
   </div>
+    <a href='/@Model["buyer"].GetId()' class="btn btn-default">Back Home</a>
+
 </div>
