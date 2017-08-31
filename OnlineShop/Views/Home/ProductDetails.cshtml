@@ -1,66 +1,74 @@
 @{
   Layout = "_Layout";
 }
-@if(Model != null)
-{
-<div class="row">
-  <div class="col-md-4">
-    <img src='@Model["product"].GetImage()' id="productimg">
-  </div>
-  <div class="col-md-5">
-    <div class="row">
-      <div class="page-header">
-        <h1>@Model["product"].GetName()</h1>
-        <h1>@Model["product"].GetBrand()</h1>
-      </div>
-    </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <img src='@Model["product"].GetImage()' id="productimg">
     </div>
 
     <form action='/cart/@Model["product"].GetId()/@Model["buyer"].GetId()' method="post">
-      <div class="row">
-        <h3>Price: $@Model["product"].GetPrice()</h3>
+
+      <div class="col-md-5 options">
+        <div class="row">
+          <div class="page-header">
+            <h1>@Model["product"].GetName()</h1>
+            <h2>@Model["product"].GetBrand()</h2>
+          </div>
+        </div>
+          <div class="row">
+            <h3>Price: $@Model["product"].GetPrice()</h3>
+          </div>
+          <div class="row">
+            <div class="select-size">
+              <label>Size:</label>
+              <select class="size" name="size-select">
+                <option value="small">Small</option>
+                <option value="small">Medium</option>
+                <option value="small">Large</option>
+              </select>
+            </div>
+          </div>
+          <div class="row colors">
+            <label>
+              <input type="radio" name="colors" value="black" checked>
+              <div class="color color-1" value> </div>
+            </label>
+
+            <label>
+              <input type="radio" name="colors" value="white">
+              <div class="color color-2" value> </div>
+            </label>
+
+            <label>
+              <input type="radio" name="colors" value="blue">
+              <div class="color color-3" value> </div>
+            </label>
+
+            <label>
+              <input type="radio" name="colors" value="green">
+              <div class="color color-4" value> </div>
+            </label>
+
+            <label>
+              <input type="radio" name="colors" value="red">
+              <div class="color color-5" value> </div>
+            </label>
+
+            <label>
+              <input type="radio" name="colors" value="beige">
+              <div class="color color-6" value> </div>
+            </label>
+          </div>
       </div>
-
-        <label>Size:</label>
-        <select class="size" name="size-select">
-          <option value="small">Small</option>
-          <option value="small">Medium</option>
-          <option value="small">Large</option>
-        </select>
-
-      <div class="row colors">
-        <label>
-          <input type="radio" name="colors" value="black" checked>
-          <div class="color color-1" value> </div>
-        </label>
-
-        <label>
-          <input type="radio" name="colors" value="white">
-          <div class="color color-2" value> </div>
-        </label>
-        <label>
-          <input type="radio" name="colors" value="blue">
-          <div class="color color-3" value> </div>
-        </label>
-        <label>
-          <input type="radio" name="colors" value="green">
-          <div class="color color-4" value> </div>
-        </label>
-        <label>
-          <input type="radio" name="colors" value="red">
-          <div class="color color-5" value> </div>
-        </label>
-        <label>
-          <input type="radio" name="colors" value="beige">
-          <div class="color color-6" value> </div>
-        </label>
+      <div class="col-md-3" id="cart">
+        <div class="well cart-well">
+          <label for="quantity">Quantity:</label>
+          <input type="number" min="1" max="20" name="quantity" value="1" required>
+          <button type="submit" class="btn btn-warning">Add to cart</button>
+        </div>
       </div>
-    </div>
-    <div class="col-md-3" id="cart">
-      <label for="quantity">Quantity:</label>
-      <input type="number" min="1" max="20" name="quantity" required>
-      <button type="submit" class="btn btn-warning">Add to cart</button>
-    </div>
-    }
     </form>
+  </div>
 </div>
