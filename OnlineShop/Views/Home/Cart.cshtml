@@ -31,9 +31,17 @@ else{
             </div>
           </div>
         }
-        <form action='/cart/@Model["buyer"].GetId()/removed/all' method="post">
-          <button id="empty-cart" type="submit" class="btn btn-danger" name="delete_button">Empty Cart</button>
-        </form>
+        @if(Model["items"].Count == 0)
+        {
+          <h3>Your cart is empty</h3>
+        }
+        else
+        {
+          <form action='/cart/@Model["buyer"].GetId()/removed/all' method="post">
+            <button id="empty-cart" type="submit" class="btn btn-danger" name="delete_button">Empty Cart</button>
+          </form>
+        }
+
       </div>
       <div class="col-md-3 well order-placement">
         <h3>Total:</h3>

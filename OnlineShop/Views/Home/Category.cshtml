@@ -28,16 +28,16 @@
   <div class="row products">
   @foreach(var product in Model["selectedCategory"].GetProducts(Model["sortParameter"]))
   {
-    <a href='/products/details/@product.GetId()/@Model["buyer"].GetId()'>
-      <div class="column category-product">
-        <img src="@product.GetImage()">
+  <a href='/products/details/@product.GetId()/@Model["buyer"].GetId()'>
+      <div class="column category-product" style="background-image: url(@product.GetImage())">
+
         <div class="brand-description">
-          <a href="/products/details/@product.GetId()">@product.GetBrand()</a><br>
-          <a href="/products/details/@product.GetId()">@product.GetDescription()</a><br>
-          <a href="/products/details/@product.GetId()">@product.GetPrice().ToString("0.00")</a>
+           <p>@product.GetBrand()</p>
+           <p>@product.GetDescription()</p>
+          <p> $@product.GetPrice()</p>
         </div>
       </div>
-    </a>
+      </a>
   }
   </div>
 }
