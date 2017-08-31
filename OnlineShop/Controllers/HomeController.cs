@@ -400,6 +400,7 @@ namespace OnlineShop.Controllers
       Model.Add("buyer",selectedBuyer);
       Model.Add("categories",allCategories);
       Model.Add("searchResults", searchResults);
+      Model.Add("searchString", searchString);
       return View(Model);
     }
   }

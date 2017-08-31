@@ -7,9 +7,15 @@ body {
 
   padding-top: 10px;
   padding-bottom: 20px;
-  background-color: #9994aa;
+  background-color: #B3B0AC;
   margin-top: 0px;
   margin-bottom: 0px;
+
+  text-shadow:1px 1px white;
+}
+#featured-header h1{
+    font-size:3em;
+    letter-spacing: 5px;
 }
 
 .footer{
@@ -22,20 +28,26 @@ body {
 
 .nav
 {
-  font-size: 1.5em;
+  font-size: 2em;
   margin-bottom: 0px;
+  padding: 10px;
 }
 .navbar{
-  background-color: #f6f4f9;
+  background-color: #f1f1f1;
   margin-bottom: 0px;
+
+padding: 30px;
 
 }
 .navbar img{
   height: 50px;
 }
 .navbar-brand{
+  padding-top:35px;
   font-size: 2em;
   margin: 10px;
+  letter-spacing: 3px;
+
 }
 
 
@@ -52,12 +64,30 @@ body {
 }
 #myCarousel{
   background-color: #f9fbff;
-  width:100%;
 }
 .featured-carousel img{
  height: 600px;
  width:auto;
  padding: 50px;
+}
+
+.footer-categories
+{
+  margin-top: 50px;
+  padding: 60px;
+  background-color: #f1effc;
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: 3px;
+  word-spacing: 40px;
+}
+
+.footer-categories a
+{
+  color: inherit;
+}
+a{
+  color: #434347;
 }
 
 .indexHeader{
@@ -68,14 +98,14 @@ body {
   text-align: center;
   margin-top: 0px;
   padding-top: 0px;
-
 }
 .indexHeader h1{
-    margin-top: 0px;
+  letter-spacing: 8px;
+  margin-top: 0px;
   font-size:  5em;
   padding-top: 250px;
   color: white;
-      text-shadow: 4px 4px black;
+  text-shadow: 4px 4px black;
 }
 
 .carousel-indicators li {
@@ -314,6 +344,13 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   width: 375px;
 }
 
+
+.carousel-description h3{
+font-size: 4em;
+
+}
+
+
 /* Buyer Detail Page */
 
 .product-history img{
@@ -332,4 +369,12 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 .receipt-container {
   text-align: center;
   font-size:13px;
+}
+
+.details-receipt {
+  margin-top: 20px;
+}
+
+.home-button {
+  margin-bottom: 15px;
 }

@@ -93,7 +93,7 @@ namespace OnlineShop.Models
 
       Product hatsOne = new Product(hats.GetId(),"MLB","Mariner's cap",13.99,"Team spirit!","The Sports Club","http://www.sportszoneelite.com/media/catalog/product/cache/1/image/940x738/9df78eab33525d08d6e5fb8d27136e95/5/3/531062104-NEW_ERA_9FIFTY_SEATTLE_MARINERS_CUSTOM-00.png");
       hatsOne.Save();
-      Product hatsTwo = new Product(hats.GetId(),"Fancy Fedoras","Fedora",17.79,"Live in your basement!","Fred Meyer","http://www.pngmart.com/files/3/Fedora-PNG-Photos.png");
+      Product hatsTwo = new Product(hats.GetId(),"Fancy Fedoras","Fedora",17.79,"Live in your basement!","Fred Meyer","https://vignette1.wikia.nocookie.net/animalcrossing/images/5/5e/Fedora.png/revision/latest?cb=20140504124922");
       hatsTwo.Save();
       Product hatsThree = new Product(hats.GetId(),"Cowboys Inc.","Cowboy hat",29.77,"Wrangle those cows!","Suit Supply","http://www.pngpix.com/wp-content/uploads/2016/07/PNGPIX-COM-Cowboy-Hat-PNG-Transparent-Image-2.png");
       hatsThree.Save();
