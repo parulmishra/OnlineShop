@@ -7,15 +7,14 @@ body {
 
   padding-top: 10px;
   padding-bottom: 20px;
-  background-color: #B3B0AC;
+  background-color: #1f5846;
   margin-top: 0px;
   margin-bottom: 0px;
-
-  text-shadow:1px 1px white;
 }
 #featured-header h1{
     font-size:3em;
     letter-spacing: 5px;
+    color:#ddd;
 }
 
 .glyphicon-shopping-cart, .glyphicon-user {
@@ -33,12 +32,12 @@ body {
 }
 
 .search-bar {
-  width:50%;
+  width:95%;
   margin:auto;
 }
 
 .footer{
-  background-color: #e0cab3;
+  background-color: #f9fbff;
   padding: 2em;
   /*position: fixed;
   bottom: 0;
@@ -61,7 +60,7 @@ body {
   height: 50px;
 }
 .navbar-brand{
-  padding-top:30px;
+  padding-top:20px;
   font-size: 2em;
   margin: 10px;
   letter-spacing: 3px;
@@ -94,7 +93,7 @@ body {
 {
   margin-top: 50px;
   padding: 60px;
-  background-color: #f1effc;
+  background-color: #e7f3ff;
   text-align: center;
   font-size: 2em;
   letter-spacing: 3px;
@@ -110,7 +109,7 @@ a{
 }
 
 .indexHeader{
-  background-image: url("https://urbanmatter.com/chicago/wp-content/uploads/2015/04/Girls-Shopping.jpg");
+  background-image: linear-gradient(to bottom,rgba(5,5,5,0.2), rgba(5,5,5,0.2)), url("https://urbanmatter.com/chicago/wp-content/uploads/2015/04/Girls-Shopping.jpg");
   background-size: cover;
   background-position: center;
   height: 600px;
@@ -119,12 +118,12 @@ a{
   padding-top: 0px;
 }
 .indexHeader h1{
-  letter-spacing: 8px;
+  letter-spacing: 10px;
   margin-top: 0px;
   font-size:  5em;
   padding-top: 250px;
-  color: white;
-  text-shadow: 4px 4px black;
+  color: #f1f1f1;
+  text-shadow: 2px 2px black;
 }
 
 .carousel-indicators li {
