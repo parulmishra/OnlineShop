@@ -1,7 +1,101 @@
 @{
   Layout = "_Layout";
 }
-<form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
+
+  <div class="row main-order">
+
+    <div class="col-md-5">
+      <div class="well order_details">
+        <h3>Order Details</h3>
+
+        @foreach (var item in @Model["items"])
+        {
+          <div class ="product-order">
+            <div class="row">
+              <div class="col-md-3">
+                <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
+              </div>
+              <div class="col-md-3">
+                <p>@item.GetProductInfo().GetBrand()</p>
+              </div>
+              <div class="col-md-3">
+                <p>@item.GetProductInfo().GetName()</p>
+              </div>
+              <div class="col-md-3">
+                <p>Price: $@item.GetProductInfo().GetPrice()</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-md-3">
+
+      <form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
+        <div class="row address-options buy-options buyer_details">
+          <label>Select From Saved Addresses:</label>
+          <select class="shipping_address form-control" name="address-select">
+            @foreach(var address in Model["buyer"].GetAddresses())
+            {
+                <option value="@address.GetId()">@address.GetName()</option>
+            }
+          </select>
+
+          <h4>Current Selected Address:</h4>
+
+
+          <label for ="buyer">Street:</label>
+          <div class="form-group">
+            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetStreet()'class="form-control" required name="buyer-address-street">
+          </div>
+
+          <label for ="buyer">City:</label>
+          <div class="form-group">
+            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetCity()'class="form-control" required name="buyer-address-city">
+          </div>
+
+          <label for ="buyer">State:</label>
+          <div class="form-group">
+            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetState()'class="form-control" required name="buyer-address-state">
+          </div>
+
+          <label for ="buyer">Zip:</label>
+          <div class="form-group">
+            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetZip()'class="form-control" required name="buyer-address-zip">
+          </div>
+
+          <label for ="buyer">Country:</label>
+          <div class="form-group">
+            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetCountry()'class="form-control" required name="buyer-address-country">
+          </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="well bill_details">
+        <div class="container">
+          <h4>Bill Details</h4>
+          <h5>Total Items: @Model["order"].GetItems().Count</h5>
+          <h5>Total Items Cost: $@Model["order"].GetSubtotal()</h5>
+          <h5 id="shipping_cost">Shipping Cost: $@((int)@Model["order"].GetSubtotal()/15)</h5>
+          <h5>Tax:$@((int)@Model["order"].GetSubtotal()/10)</h5>
+
+          <h5>Grand Total: $@Model["order"].GetGrandTotal()</h2>
+
+
+          <button type="submit" class="btn btn-success">Place Order</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+@* <form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
   <div class="well buyer_details">
     <div class="row">
       <div class="col-md-5">
@@ -98,4 +192,4 @@
     </div>
   </div>
 </div>
-</form>
+</form> *@
