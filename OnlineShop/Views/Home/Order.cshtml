@@ -86,11 +86,11 @@
         <div class="container">
           <h4>Bill Details</h4>
           <h5>Total Items: @Model["order"].GetItems().Count</h5>
-          <h5>Total Items Cost: $@Model["order"].GetSubtotal()</h5>
-          <h5 id="shipping_cost">Shipping Cost: $@Model["order"].GetShipping()</h5>
-          <h5>Tax:$@Model["order"].GetTax())</h5>
+          <h5>Total Items Cost: $@Model["order"].GetSubtotal().ToString("0.00")</h5>
+          <h5 id="shipping_cost">Shipping Cost: $@Model["order"].GetShipping().ToString("0.00")</h5>
+          <h5>Tax:$@Model["order"].GetTax().ToString("0.00"))</h5>
 
-          <h2>Grand Total: $@Model["order"].GetGrandTotal()</h2>
+          <h2>Grand Total: $@Model["order"].GetGrandTotal().ToString("0.00")</h2>
 
           <button type="submit" class="btn btn-success">Place Order</button>
         </div>
