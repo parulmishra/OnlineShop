@@ -7,7 +7,7 @@ body {
 
   padding-top: 10px;
   padding-bottom: 20px;
-  background-color: #9994aa;
+  background-color: #B3B0AC;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -26,7 +26,7 @@ body {
   margin-bottom: 0px;
 }
 .navbar{
-  background-color: #f6f4f9;
+  background-color: #f1f1f1;
   margin-bottom: 0px;
 
 }
@@ -34,6 +34,7 @@ body {
   height: 50px;
 }
 .navbar-brand{
+  padding-top:35px;
   font-size: 2em;
   margin: 10px;
 }
@@ -309,10 +310,6 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
   border-bottom: 1px solid black;
   padding-bottom: 20px;
 }
-.bill_details
-{
-
-}
 
 /* Buyer Detail Page */
 
@@ -332,4 +329,12 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 .receipt-container {
   text-align: center;
   font-size:13px;
+}
+
+.details-receipt {
+  margin-top: 20px;
+}
+
+.home-button {
+  margin-bottom: 15px;
 }
