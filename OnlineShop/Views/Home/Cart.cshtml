@@ -43,13 +43,23 @@ else{
         }
 
       </div>
-      <div class="col-md-3 well order-placement">
+
+
+      @if(Model["items"].Count == 0)
+      {
+        
+      }
+      else{
+            <div class="col-md-3 well order-placement">
         <h3>Total:</h3>
 
         <form action = '/order/@Model["buyer"].GetId()' method="post">
           <button type="submit" class="btn btn-success" name="order_button">Place an Order</button>
         </form>
-      </div>
+          </div>
+      }
+
+
     </div>
   </div>
 }
