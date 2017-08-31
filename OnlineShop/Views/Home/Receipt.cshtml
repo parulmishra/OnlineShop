@@ -7,7 +7,7 @@
     <h2>Order Placed!</h2>
     <h4>@Model["order"].GetCheckoutDate()
   </div>
-  <div class="row">
+  <div class="row product-order">
   @foreach (var item in @Model["order"].GetItems())
   {
     <div class ="product">
@@ -21,10 +21,10 @@
   }
   </div>
 
-  <div class="row">
+  <div class="row details-receipt">
     <div class="col-md-6">
-      <h3>Shipping Address</h3>
-      <h4>@Model["address"].GetName()</h4>
+      <h4>Shipping Address</h4>
+      <h5>@Model["address"].GetName()</h5>
       <p>@Model["address"].GetStreet()</p>
       <p>@Model["address"].GetCity() @Model["address"].GetState() @Model["address"].GetZip()</p>
       <p>@Model["address"].GetCountry()</p>
@@ -39,6 +39,6 @@
 
     </div>
   </div>
-    <a href='/@Model["buyer"].GetId()' class="btn btn-default">Back Home</a>
+    <a href='/@Model["buyer"].GetId()' class="btn btn-default home-button">Back Home</a>
 
 </div>
