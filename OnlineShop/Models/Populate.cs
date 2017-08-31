@@ -69,11 +69,11 @@ namespace OnlineShop.Models
       Category socks = new Category("Socks");
       socks.Save();
 
-      Product socksOne = new Product(socks.GetId(),"Gold Toe","Gym socks",7.00,"When you're on the run!","Forever 21","https://www.goldtoe.com/assets/img/catalog/product/large/711-101S-041-S.png");
+      Product socksOne = new Product(socks.GetId(),"Gold Toe","Gym socks",7.99,"When you're on the run!","Forever 21","https://www.goldtoe.com/assets/img/catalog/product/large/711-101S-041-S.png");
       socksOne.Save();
-      Product socksTwo = new Product(socks.GetId(),"Knee Toppers","Tube socks",5.00,"Keepin you warm at night","Buckle","https://cdn3.volusion.com/rkfzh.yaufw/v/vspfiles/photos/25-007-WHT-2.gif?1385472336");
+      Product socksTwo = new Product(socks.GetId(),"Knee Toppers","Tube socks",5.66,"Keepin you warm at night","Buckle","https://cdn3.volusion.com/rkfzh.yaufw/v/vspfiles/photos/25-007-WHT-2.gif?1385472336");
       socksTwo.Save();
-      Product socksThree = new Product(socks.GetId(),"Silly Socks","Polka dot socks",6.00,"When your feet are partying!","Zumies","http://www.underwearexpert.com/wp-content/uploads/2014/06/bd01-608_m.png");
+      Product socksThree = new Product(socks.GetId(),"Silly Socks","Polka dot socks",6.99,"When your feet are partying!","Zumies","http://www.underwearexpert.com/wp-content/uploads/2014/06/bd01-608_m.png");
       socksThree.Save();
 
 
@@ -82,9 +82,9 @@ namespace OnlineShop.Models
 
       Product shoesOne = new Product(shoes.GetId(),"Reebok","Gym shoes",44.99,"When you're on the run!","Forever 21","http://hometraininguae.com/images/sportclothes/running%20shoes.png");
       shoesOne.Save();
-      Product shoesTwo = new Product(shoes.GetId(),"Hikers","Hiking boots",65.00,"Tread those trails!","REI","http://pngimg.com/uploads/boots/boots_PNG7802.png");
+      Product shoesTwo = new Product(shoes.GetId(),"Hikers","Hiking boots",65.09,"Tread those trails!","REI","http://pngimg.com/uploads/boots/boots_PNG7802.png");
       shoesTwo.Save();
-      Product shoesThree = new Product(shoes.GetId(),"Comfeet","Slippers",9.00,"Keepin' it warm!","Payless","http://images.lifeisgood.com/Mens-Slipper-Slides_43517_2_lg.png");
+      Product shoesThree = new Product(shoes.GetId(),"Comfeet","Slippers",9.01,"Keepin' it warm!","Payless","http://images.lifeisgood.com/Mens-Slipper-Slides_43517_2_lg.png");
       shoesThree.Save();
 
 
@@ -95,7 +95,7 @@ namespace OnlineShop.Models
       hatsOne.Save();
       Product hatsTwo = new Product(hats.GetId(),"Fancy Fedoras","Fedora",17.79,"Live in your basement!","Fred Meyer","http://www.pngmart.com/files/3/Fedora-PNG-Photos.png");
       hatsTwo.Save();
-      Product hatsThree = new Product(hats.GetId(),"Cowboys Inc.","Cowboy hat",29.00,"Wrangle those cows!","Suit Supply","http://www.pngpix.com/wp-content/uploads/2016/07/PNGPIX-COM-Cowboy-Hat-PNG-Transparent-Image-2.png");
+      Product hatsThree = new Product(hats.GetId(),"Cowboys Inc.","Cowboy hat",29.77,"Wrangle those cows!","Suit Supply","http://www.pngpix.com/wp-content/uploads/2016/07/PNGPIX-COM-Cowboy-Hat-PNG-Transparent-Image-2.png");
       hatsThree.Save();
 
 
@@ -104,7 +104,7 @@ namespace OnlineShop.Models
 
       Product jacketsOne = new Product(jackets.GetId(),"EMP","Classic leather jacket",63.99,"Smoke those cigarretes!","Amazon","http://cdn.acfrg.com/i/__fit/ACfrG/productpics_fullsize/1/130109a-emp.png");
       jacketsOne.Save();
-      Product jacketsTwo = new Product(jackets.GetId(),"Marker","Winter jacket",50.00,"Cut the cold!","Sports Authority","http://22867-presscdn.pagely.netdna-cdn.com/wp-content/uploads/2014/11/marker-pumphouse-jacket-2015-640x640.png");
+      Product jacketsTwo = new Product(jackets.GetId(),"Marker","Winter jacket",50.99,"Cut the cold!","Sports Authority","http://22867-presscdn.pagely.netdna-cdn.com/wp-content/uploads/2014/11/marker-pumphouse-jacket-2015-640x640.png");
       jacketsTwo.Save();
       Product jacketsThree = new Product(jackets.GetId(),"Vapor","Windbreaker",29.59,"For when it's a little chilly out!","Big 5","http://www.condoroutdoor.com/images/products/detail/10617_018F_2015.2.png");
       jacketsThree.Save();
