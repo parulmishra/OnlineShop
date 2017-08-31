@@ -236,6 +236,10 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 #cart label, input{
   font-size: 1.3em;
 }
+.sort-by{
+  font-size: 1.3em;
+  text-align: center;
+}
 
 .cart-well {
   text-align: center;
