@@ -23,7 +23,7 @@ else{
               <p>@item.GetProductInfo().GetBrand()</p>
               <p>@item.GetColor()</p>
               <p>@item.GetSize()</p>
-              <p class="price">$@item.GetProductInfo().GetPrice()</p>
+              <p class="price">$@item.GetProductInfo().GetPrice().ToString("0.00")</p>
               <form action='/cart/@Model["buyer"].GetId()/removed' method="post">
                 <input type="hidden" value='@item.GetId()' name="item-id">
                 <button type="submit" class="btn btn-danger btn-sm" name="delete_button">Remove From Cart</button>
