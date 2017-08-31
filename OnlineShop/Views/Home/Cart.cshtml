@@ -36,7 +36,7 @@ else
                   <p class="price">$@item.GetProductInfo().GetPrice().ToString("0.00")</p>
                   <form action='/cart/@Model["buyer"].GetId()/removed' method="post">
                     <input type="hidden" value='@item.GetId()' name="item-id">
-                    <button type="submit" class="btn btn-danger btn-sm" name="delete_button">Remove From Cart</button>
+                    <p><button type="submit" class="btn btn-danger btn-sm" name="delete_button">Remove From Cart</button></p>
                   </form>
                 </div>
               </div>
@@ -62,7 +62,7 @@ else
               <h3>Total:</h3>
             </div>
             <div class="col-sm-6">
-              <h3>$@Model["order"].GetSubtotal()</h3>
+              <h3>$@Model["order"].GetSubtotal().ToString("0.00")</h3>
             </div>
 
             <form action = '/order/@Model["buyer"].GetId()' method="post">
