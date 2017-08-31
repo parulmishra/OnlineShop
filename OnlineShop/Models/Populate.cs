@@ -17,9 +17,9 @@ namespace OnlineShop.Models
 
       Product shirtsOne = new Product(shirts.GetId(),"Tommy Bahama","Polo",49.99,"The best Tommy has to offer","Bahama Inc.","http://www.pngmart.com/files/3/Polo-Shirt-PNG-Image.png");
       shirtsOne.Save();
-      Product shirtsTwo = new Product(shirts.GetId(),"GAP","Button up",49.99,"Work work","GAP","https://cdn.shopify.com/s/files/1/0169/5130/products/tradlands_stow_lake_featured_button_up_shirts_for_women_grande.png?v=1499358188");
+      Product shirtsTwo = new Product(shirts.GetId(),"GAP","Button up",55.99,"Work work","GAP","https://cdn.shopify.com/s/files/1/0169/5130/products/tradlands_stow_lake_featured_button_up_shirts_for_women_grande.png?v=1499358188");
       shirtsTwo.Save();
-      Product shirtsThree = new Product(shirts.GetId(),"Scott Vintage","T-shirt",49.99,"Vintage","Nordstrom","http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png");
+      Product shirtsThree = new Product(shirts.GetId(),"Scott Vintage","T-shirt",10.99,"Vintage","Nordstrom","http://pngimg.com/uploads/tshirt/tshirt_PNG5436.png");
       shirtsThree.Save();
 
 

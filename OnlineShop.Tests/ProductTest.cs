@@ -81,5 +81,47 @@ namespace OnlineShop.Tests
       //Assert
       CollectionAssert.AreEqual(expectedProductList, actualProductList);
     }
+
+    [TestMethod]
+    public void Search_SearchesProductsInDBAndReturnsProductListWithMatchingBrand_ProductList()
+    {
+      Product testProduct1 = new Product(1,"Adidas","Jeans",100.0,"good quality","Amazon","");
+      testProduct1.Save();
+      Product testProduct2 = new Product(1,"Reebok","Shoes",100.0,"good quality","Amazon","");
+      testProduct2.Save();
+      Product testProduct3 = new Product(1,"Adidas","Shoes",100.0,"good quality","Amazon","");
+      testProduct3.Save();
+
+      List<Product> expected = new List<Product> {testProduct1, testProduct3};
+      List<Product> actual = Product.Search("Adidas");
+
+      CollectionAssert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void Search_SearchesProductsInDBAndReturnsProductListWithMatchingName_ProductList()
+    {
+      Product testProduct1 = new Product(1,"Adidas","Jeans",100.0,"good quality","Amazon","");
+      testProduct1.Save();
+      Product testProduct2 = new Product(1,"Reebok","Shoes",100.0,"good quality","Amazon","");
+      testProduct2.Save();
+      Product testProduct3 = new Product(1,"Adidas","Shoes",100.0,"good quality","Amazon","");
+      testProduct3.Save();
+
+      List<Product> expected = new List<Product> {testProduct2, testProduct3};
+      List<Product> actual = Product.Search("Shoes");
+
+      foreach(var product in expected)
+      {
+        Console.WriteLine("EXPECTED: " + product.GetBrand() + ", " + product.GetName());
+      }
+
+      foreach(var product in actual)
+      {
+        Console.WriteLine("ACTUAL: " + product.GetBrand() + ", " + product.GetName());
+      }
+
+      CollectionAssert.AreEqual(expected, actual);
+    }
   }
 }
