@@ -1,13 +1,23 @@
 @{
   Layout = "_Layout";
 }
-<div class="page-header" id="featured-header">
-  <h1>Featured Products</h1>
+
+
+<div class="indexHeader">
+  <h1>Shopping Made Easy.</h1>
 </div>
 
-<div class="container">
+
+  <div class="page-header" id="featured-header">
+    <h1>Featured Products</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+
+
   @if(@Model["featured"] != null && @Model["products"] != null)
   {
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -25,7 +35,7 @@
           <a href='/products/details/@Model["featured"].GetId()/@Model["buyer"].GetId()'>
           <div class="row">
             <div class="col-md-6 carousel-image">
-              <img src='@Model["featured"].GetImage()' alt='@Model["featured"].GetName()' style="width:100%;">
+              <img src='@Model["featured"].GetImage()' alt='@Model["featured"].GetName()' class=".object-fit_contain">
             </div>
             <div class="col-md-6 carousel-description">
               <h3>@Model["featured"].GetBrand()</h3>
@@ -42,7 +52,7 @@
               <a href='/products/details/@product.GetId()/@Model["buyer"].GetId()'>
               <div class="row">
                 <div class="col-md-6 carousel-image">
-                  <img src="@product.GetImage()" alt="@product.GetName()" style="width:100%;">
+                  <img src="@product.GetImage()" alt="@product.GetName()" class=".object-fit_contain">
                 </div>
                 <div class="col-md-6 carousel-description">
                   <h3>@product.GetBrand()</h3>
@@ -54,35 +64,6 @@
             </div>
         }
 
-
-        @* <div class="item featured-carousel ">
-
-          <div class="row">
-            <div class="col-md-6 carousel-image">
-              <img src="http://www.pngmart.com/files/1/Mens-Pant-PNG-HD.png" alt="Pants" style="width:100%;">
-            </div>
-            <div class="col-md-6 carousel-description">
-              <h3>[Brand] pants</h3>
-              <ul>
-                <h4>Comes in</h4>
-                <li>[Color1]</li>
-                <li>[Color2]</li>
-                <li>[Color3]</li>
-              </ul>
-              <ul>
-                <h4>Sizes</h4>
-                <li>[Color1]</li>
-                <li>[Color2]</li>
-                <li>[Color3]</li>
-              </ul>
-              <h2>Only [Price]!</h2>
-            </div>
-          </div>
-
-          <div class="carousel-caption">
-            <a href="#"><h3>View Product Details</h3></a>
-          </div>
-        </div> *@
 
       </div>
 
@@ -97,4 +78,5 @@
       </a>
     </div>
   }
+    </div>
   </div>
