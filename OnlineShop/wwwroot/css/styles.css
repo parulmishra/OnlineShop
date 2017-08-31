@@ -257,7 +257,7 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 /* Buy page */
 
 .main-order {
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .buy-options
@@ -266,6 +266,7 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 .order_details
 {
+  text-align: center;
 }
 .bill_details
 {
