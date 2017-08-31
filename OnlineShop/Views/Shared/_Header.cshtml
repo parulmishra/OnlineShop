@@ -9,6 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href='/@Model["buyer"].GetId()'>Online Shop</a>
+
     </div>
 
     <form action='/products/@Model["buyer"].GetId()/search' autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
@@ -34,9 +35,8 @@
             }
           </ul>
         </li>
+
       </ul>
-
-
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href='/cart/@Model["buyer"].GetId()'>Cart</a></li>
