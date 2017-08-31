@@ -48,6 +48,9 @@ _This site uses a SQL database to track the purcashes of clothing items in an on
 
 ## Setup
 
+## To populate the database with products, go to /populate. This will clear the database and insert content into all tables.
+
+
 * This website will be hosted on GitHub
 * https://github.com/parulmishra/OnlineShop
 
