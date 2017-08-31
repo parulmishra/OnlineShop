@@ -27,21 +27,25 @@ body {
 
 .nav
 {
-  font-size: 1.5em;
+  font-size: 2em;
   margin-bottom: 0px;
+  padding: 10px;
 }
 .navbar{
   background-color: #f6f4f9;
   margin-bottom: 0px;
 
+padding: 30px;
 
 }
 .navbar img{
   height: 50px;
 }
 .navbar-brand{
-  font-size: 2em;
+  font-size: 3em;
   margin: 10px;
+  letter-spacing: 3px;
+
 }
 
 
@@ -58,7 +62,6 @@ body {
 }
 #myCarousel{
   background-color: #f9fbff;
-  width:100%;
 }
 .featured-carousel img{
  height: 600px;
