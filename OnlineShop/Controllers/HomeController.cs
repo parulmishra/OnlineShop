@@ -69,12 +69,36 @@ namespace OnlineShop.Controllers
       List<Category> allCategories = Category.GetAll();
       List<Product> allProducts = Product.GetAll();
       Buyer newBuyer = Buyer.Find(buyerId);
+
+      string sortParameter = "brandAlphabetical";
+
       Model.Add("categories", allCategories);
       Model.Add("selectedCategory", Category.Find(catId));
       Model.Add("products",allProducts);
       Model.Add("buyer",newBuyer);
+      Model.Add("sortParameter", sortParameter);
       return View("Category",Model);
     }
+
+    [HttpPost("/categories/{catId}/{buyerId}")]
+    public ActionResult CategorySort(int catId, int buyerId)
+    {
+      Dictionary<string,object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+      List<Product> allProducts = Product.GetAll();
+      Buyer newBuyer = Buyer.Find(buyerId);
+      Console.WriteLine(Request.Form["sort"]);
+      string sortParameter = Request.Form["sort"];
+
+      Model.Add("categories", allCategories);
+      Model.Add("selectedCategory", Category.Find(catId));
+      Model.Add("products",allProducts);
+      Model.Add("buyer",newBuyer);
+      Model.Add("sortParameter", sortParameter);
+      return View("Category",Model);
+    }
+
+
     [HttpGet("/products/details/{prodId}/{buyerId}")]
     public ActionResult ProductDetails(int prodId, int buyerId)
     {
@@ -359,6 +383,23 @@ namespace OnlineShop.Controllers
       Model.Add("addresses",selectedBuyer.GetAddresses());
       Model.Add("buyer",selectedBuyer);
       Model.Add("categories",allCategories);
+      return View(Model);
+    }
+    [HttpPost("/products/{id}/search")]
+    public ActionResult SearchResults(int id)
+    {
+      string searchString = Request.Form["searchtext"];
+      List<Product> searchResults = Product.Search(searchString);
+
+      Dictionary<string, object> Model = new Dictionary<string,object>();
+      List<Category> allCategories = Category.GetAll();
+
+
+      Buyer selectedBuyer = Buyer.Find(id);
+
+      Model.Add("buyer",selectedBuyer);
+      Model.Add("categories",allCategories);
+      Model.Add("searchResults", searchResults);
       return View(Model);
     }
   }
