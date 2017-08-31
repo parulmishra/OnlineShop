@@ -1,4 +1,16 @@
+<div class="footer-categories">
+<span>Shop:</span>
+    @foreach(var category in @Model["categories"])
+    {
+      <a href='/categories/@category.GetId()/@Model["buyer"].GetId()'><span> @category.GetName()</span></a>
+    }
+
+</div>
+
 <footer class="footer">
+
+
+
   <div class="container">
     <p class="text-muted">&copy Team names</p>
   </div>
