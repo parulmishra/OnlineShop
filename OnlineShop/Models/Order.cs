@@ -220,6 +220,25 @@ namespace OnlineShop.Models
       return subTotal;
     }
 
+    public double GetTax()
+    {
+      return GetSubtotal()/9.5;
+    }
+
+    public double GetShipping()
+    {
+      double shippingcost = 0;
+      List<Item> myItems = GetItems();
+      foreach(var item in myItems)
+      {
+        shippingcost += 2;
+      }
+      return shippingcost;
+    }
+    public double GetGrandTotal()
+    {
+      return GetSubtotal() + GetTax() + GetShipping();
+    }
     public void Purchase()
     {
       DateTime now = DateTime.Now;
