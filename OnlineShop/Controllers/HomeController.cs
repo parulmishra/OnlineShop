@@ -87,7 +87,7 @@ namespace OnlineShop.Controllers
       List<Category> allCategories = Category.GetAll();
       List<Product> allProducts = Product.GetAll();
       Buyer newBuyer = Buyer.Find(buyerId);
-      Console.WriteLine(Request.Form["sort"]);
+
       string sortParameter = Request.Form["sort"];
 
       Model.Add("categories", allCategories);
@@ -289,7 +289,8 @@ namespace OnlineShop.Controllers
       // model.Add("products", buyerProducts);
       model.Add("categories", Category.GetAll());
       model.Add("buyer", selectedBuyer);
-      Console.WriteLine(selectedBuyer.GetId());
+
+
       //try login
       if (selectedBuyer.GetId() == 0)
       {
