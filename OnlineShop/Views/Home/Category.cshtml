@@ -3,6 +3,11 @@
 }
 
 <div class="page-header" id="featured-header">
+  @if(Model != null )
+  {
+    <h1>All @Model["selectedCategory"].GetName()</h1>;
+  }
+</div>
 
 <div class="row sort-by">
   <label>Sort By:</label>

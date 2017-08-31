@@ -80,7 +80,7 @@ namespace OnlineShop.Models
       Category shoes = new Category("Shoes");
       shoes.Save();
 
-      Product shoesOne = new Product(shoes.GetId(),"Reebok","Gym shoes",45.50,"When you're on the run!","Forever 21","http://hometraininguae.com/images/sportclothes/running%20shoes.png");
+      Product shoesOne = new Product(shoes.GetId(),"Reebok","Gym shoes",44.99,"When you're on the run!","Forever 21","http://hometraininguae.com/images/sportclothes/running%20shoes.png");
       shoesOne.Save();
       Product shoesTwo = new Product(shoes.GetId(),"Hikers","Hiking boots",65.00,"Tread those trails!","REI","http://pngimg.com/uploads/boots/boots_PNG7802.png");
       shoesTwo.Save();
