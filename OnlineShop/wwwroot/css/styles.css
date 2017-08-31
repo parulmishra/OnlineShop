@@ -311,7 +311,7 @@ label > input:checked + div{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 .bill_details
 {
-
+  width: 375px;
 }
 
 /* Buyer Detail Page */

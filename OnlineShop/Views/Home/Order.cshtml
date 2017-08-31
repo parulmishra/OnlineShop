@@ -2,194 +2,100 @@
   Layout = "_Layout";
 }
 
-  <div class="row main-order">
+<div class="row main-order">
 
-    <div class="col-md-5">
-      <div class="well order_details">
-        <h3>Order Details</h3>
+  <div class="col-md-5">
+    <div class="well order_details">
+      <h3>Order Details</h3>
 
-        @foreach (var item in @Model["items"])
-        {
-          <div class ="product-order">
-            <div class="row">
-              <div class="col-md-3">
-                <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
-              </div>
-              <div class="col-md-3">
-                <p>@item.GetProductInfo().GetBrand()</p>
-              </div>
-              <div class="col-md-3">
-                <p>@item.GetProductInfo().GetName()</p>
-              </div>
-              <div class="col-md-3">
-                <p>Price: $@item.GetProductInfo().GetPrice().ToString("0.00")</p>
-              </div>
+      @foreach (var item in @Model["items"])
+      {
+        <div class ="product-order">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
+            </div>
+            <div class="col-md-3">
+              <p>@item.GetProductInfo().GetBrand()</p>
+            </div>
+            <div class="col-md-3">
+              <p>@item.GetProductInfo().GetName()</p>
+            </div>
+            <div class="col-md-3">
+              <p>Price: $@item.GetProductInfo().GetPrice().ToString("0.00")</p>
             </div>
           </div>
-        }
-      </div>
-    </div>
-
-    <div class="col-md-3">
-
-      <form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
-        <div class="row address-options buy-options buyer_details">
-          <label>Select From Saved Addresses:</label>
-          <select class="shipping_address form-control" name="address-select">
-            @foreach(var address in Model["buyer"].GetAddresses())
-            {
-                <option value="@address.GetId()">@address.GetName()</option>
-            }
-          </select>
-
-          <h4>Current Selected Address:</h4>
-
-
-          <label for ="buyer">Street:</label>
-          <div class="form-group">
-            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetStreet()'class="form-control" required name="buyer-address-street">
-          </div>
-
-          <label for ="buyer">City:</label>
-          <div class="form-group">
-            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetCity()'class="form-control" required name="buyer-address-city">
-          </div>
-
-          <label for ="buyer">State:</label>
-          <div class="form-group">
-            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetState()'class="form-control" required name="buyer-address-state">
-          </div>
-
-          <label for ="buyer">Zip:</label>
-          <div class="form-group">
-            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetZip()'class="form-control" required name="buyer-address-zip">
-          </div>
-
-          <label for ="buyer">Country:</label>
-          <div class="form-group">
-            <input type="text" value='@Model["buyer"].GetAddresses()[0].GetCountry()'class="form-control" required name="buyer-address-country">
-          </div>
-
         </div>
-
-    </div>
-
-    <div class="col-md-4">
-      <div class="well bill_details">
-        <div class="container">
-          <h4>Bill Details</h4>
-          <h5>Total Items: @Model["order"].GetItems().Count</h5>
-          <h5>Total Items Cost: $@Model["order"].GetSubtotal().ToString("0.00")</h5>
-          <h5 id="shipping_cost">Shipping Cost: $@Model["order"].GetShipping().ToString("0.00")</h5>
-          <h5>Tax:$@Model["order"].GetTax().ToString("0.00")</h5>
-
-          <h5>Grand Total: $@Model["order"].GetGrandTotal().ToString("0.00")</h2>
-
-
-          <button type="submit" class="btn btn-success">Place Order</button>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-
-
-
-@* <form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
-  <div class="well buyer_details">
-    <div class="row">
-      <div class="col-md-5">
-        <div class="row address-options buy-options">
-          <label>Ship To:</label>
-          <select class="shipping_address" name="address-select">
-            @foreach(var address in Model["buyer"].GetAddresses())
-            {
-                <option value="@address.GetId()">@address.GetName()</option>
-            }
-          </select>
-          <p>Or</p>
-          <button type="button" class="btn btn-info" name="shipping_address" id="shipping_address">Add New Shipping Address</button>
-        </div>
-          <div id="add_new_shipping_address">
-
-          </div>
-
-
-      <div class="row buy-options">
-        <label>Select Payment Method:</label>
-        <select class="payment_methods">
-          <option>Visa</option>
-          <option>MasterCard</option>
-          <option>American Express</option>
-          <option>Discover</option>
-        </select>
-      </div>
-
-      <div class="row card-form">
-        <form action = "/" method="post">
-          <label for ="author">Card Number</label>
-          <div class="form-group">
-            <input type="number" class="form-control" name="buyer-card-number">
-          </div>
-
-          <label for ="author">Security Code</label>
-          <div class="form-group">
-            <input type="text" class="form-control" name="buyer-card-code">
-          </div>
-
-          <label for ="author">Expiration Date</label>
-          <div class="form-group">
-            <input type="text" class="form-control" name="buyer-card-date">
-          </div>
-        </form>
-      </div>
-
-      <div class="row buy-options">
-        <label>Select Delivery Options:</label>
-        <select class="delivery_options">
-          <option>Express Delivery: 1 to 2 days</option>
-          <option>Standard Delivery: 3 to 5 days </option>
-        </select>
-      </div>
-     </div>
-    <div class="col-md-3">
-      <div class="well order_details">
-
-
-          <h4>Order Details</h4>
-
-          @foreach (var item in @Model["items"])
-          {
-            <div class ="product">
-
-              <img src="@item.GetProductInfo().GetImage()" alt="@item.GetProductInfo().GetName()">
-              <p>@item.GetColor() @item.GetProductInfo().GetName()</p>
-              <p>@item.GetSize() </p>
-              <p>@item.GetProductInfo().GetBrand()</p>
-              <p>Price: $@item.GetProductInfo().GetPrice().ToString("0.00")</p>
-                </div>
-          }
-
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-      <div class="well bill_details">
-        <div class="container">
-          <h4>Bill Details</h4>
-          <h5>Total Items: @Model["order"].GetItems().Count</h5>
-          <h5>Total Items Cost: <span class="orderTotals">$@Model["order"].GetSubtotal().ToString("0.00")<span></h5>
-          <h5 id="shipping_cost">Shipping Cost: $@Model["order"].GetShipping().ToString("0.00")</h5>
-          <h5>Tax: $@Model["order"].GetTax().ToString("0.00")</h5>
-
-          <h2>Grand Total: $@Model["order"].GetGrandTotal().ToString("0.00")</h2>
-
-          <button type="submit" class="btn btn-success">Place Order</button>
-        </div>
-      </div>
+      }
     </div>
   </div>
+
+  <div class="col-md-3">
+
+    <form action='/receipt/@Model["buyer"].GetCurrentOrder().GetId()/@Model["buyer"].GetId()' method="post">
+      <div class="row address-options buy-options buyer_details">
+        <label>Select From Saved Addresses:</label>
+        <select class="shipping_address form-control" name="address-select">
+          @foreach(var address in Model["buyer"].GetAddresses())
+          {
+            <option value="@address.GetId()">@address.GetName()</option>
+          }
+        </select>
+
+        <h4>Current Selected Address:</h4>
+
+
+        <label for ="buyer">Street:</label>
+        <div class="form-group">
+          <input type="text" value='@Model["buyer"].GetAddresses()[0].GetStreet()'class="form-control" required name="buyer-address-street">
+        </div>
+
+        <label for ="buyer">City:</label>
+        <div class="form-group">
+          <input type="text" value='@Model["buyer"].GetAddresses()[0].GetCity()'class="form-control" required name="buyer-address-city">
+        </div>
+
+        <label for ="buyer">State:</label>
+        <div class="form-group">
+          <input type="text" value='@Model["buyer"].GetAddresses()[0].GetState()'class="form-control" required name="buyer-address-state">
+        </div>
+
+        <label for ="buyer">Zip:</label>
+        <div class="form-group">
+          <input type="text" value='@Model["buyer"].GetAddresses()[0].GetZip()'class="form-control" required name="buyer-address-zip">
+        </div>
+
+        <label for ="buyer">Country:</label>
+        <div class="form-group">
+          <input type="text" value='@Model["buyer"].GetAddresses()[0].GetCountry()'class="form-control" required name="buyer-address-country">
+        </div>
+
+      </div>
+       </form>
+    </div>
+
+    <div class="col-md-4">
+      <div class="well bill_details">
+        <div class="container">
+          <h4>Bill Details</h4>
+
+
+          <div class="row">
+            <div class="col-sm-2">
+              <h5>Total Items:</h5>
+              <h5>Total Items Cost:</h5>
+              <h5 id="shipping_cost">Shipping Cost:</h5>
+              <h5>Grand Total:</h5>
+            </div>
+            <div class="col-md-4">
+              <h5>@Model["order"].GetItems().Count</h5>
+              <h5>$@Model["order"].GetSubtotal().ToString("0.00")</h5>
+              <h5>$@Model["order"].GetShipping().ToString("0.00")</h5>
+              <h5>$@Model["order"].GetGrandTotal().ToString("0.00")</h5>
+              <button type="submit" class="btn btn-success">Place Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
-</form> *@
